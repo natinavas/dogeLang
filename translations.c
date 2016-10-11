@@ -61,6 +61,7 @@ void define_int(char* command, int len){
 		j++;
 		i++;
 	}
+	var_name[j]=0;
 	printf("int %s;\n", var_name);
 	free(var_name);
 	return;
@@ -77,6 +78,7 @@ void define_charptr(char* command, int len){
 		j++;
 		i++;
 	}
+	var_name[j] = 0;
 	printf("char* %s;\n", var_name);
 	free(var_name);
 	return;
