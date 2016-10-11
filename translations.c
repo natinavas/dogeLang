@@ -9,6 +9,9 @@
 void define_int(char* command, int len);
 void define_charptr(char* command, int len);
 void define_value(char* command, int len);
+void opening_bracket();
+void closing_bracket();
+void return_statement(char* command, int len);
 
 int main(void){
 	char* hola = "very doge so words";
@@ -17,6 +20,12 @@ int main(void){
 	define_int(hola2, strlen(hola2));
 	char* hola3 = "doge is 2";
 	define_value(hola3, strlen(hola3));
+	opening_bracket();
+	closing_bracket();
+	printf("\n");
+	char* hola4 = "plz hola go to the moon";
+	return_statement(hola4, strlen(hola4));
+	
 	return 0;
 }
 
@@ -85,3 +94,25 @@ void define_value(char* command, int len){
 	return;
 	
 }
+
+void opening_bracket(){
+	printf("{");
+}
+
+void closing_bracket(){
+	printf("}");
+}
+
+void return_statement(char* command, int len){
+	int i = 4;
+	int j=0;
+	char* value = malloc(len -18);
+	for(i = 4; command[i]!=' '; i++, j++){
+		value[j] = command[i];
+	}
+	printf("return %s;\n", value);
+	free(value);
+}
+
+
+
