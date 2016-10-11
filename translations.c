@@ -12,6 +12,14 @@ void define_value(char* command, int len);
 void opening_bracket();
 void closing_bracket();
 void return_statement(char* command, int len);
+void while_loop(char* command, int len);
+void print_func(char* command, int len);
+void if_statement(char* command, int len);
+void if_not_statement(char* command, int len);
+void else_statement(char* command, int len);
+void else_if_statement(char* command, int len);
+
+
 
 int main(void){
 	char* hola = "very doge so words";
@@ -25,6 +33,18 @@ int main(void){
 	printf("\n");
 	char* hola4 = "plz hola go to the moon";
 	return_statement(hola4, strlen(hola4));
+	
+	char* ifstat = "rly doge not true";
+	char* ifelsstat = "but rly doge not true";
+	char* notif = "notrly hi";
+	char* butt = "but helou";
+	
+	if_statement(ifstat, strlen(ifstat));
+	else_if_statement(ifelsstat, strlen(ifelsstat));
+	if_not_statement(notif, strlen(notif));
+	else_statement(butt, strlen(butt));
+	
+	
 	
 	return 0;
 }
@@ -114,5 +134,26 @@ void return_statement(char* command, int len){
 	free(value);
 }
 
+void while_loop(char* command, int len){
+	printf("while(%s);\n", command+4);
+}
 
+void print_func(char* command, int len){
+	printf("printf(%s);\n",command+4);
+}
 
+void if_statement(char* command, int len){
+	printf("if(%s)\n", command+4);
+}
+
+void if_not_statement(char* command, int len){
+	printf("if(!%s)\n", command+7);
+}
+
+void else_statement(char* command, int len){
+	printf("else\n");
+}
+
+void else_if_statement(char* command, int len){
+	printf("else if(%s)\n", command+8);
+}
