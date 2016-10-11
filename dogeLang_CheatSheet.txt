@@ -1,0 +1,47 @@
+dogeLang CheatSheet
+
+---------------------------------------------------------------
+Language
+
+shh [comment] - // [comment]
+
+very [var] is [value] so numbr - int [var] = [value]
+very [var] is [value] so words - char* [var] = [value]
+[var] is [value] - [var] = [value]
+
+such [name] much [variables] - function [name] ([variables])
+
+wow - {
+woow - }
+
+wow [var] - return [var]
+
+rly [params] - if ([params])
+notrly [params] - if (! [params])
+but rly [params] - else if ([params])
+but - else
+
+many [params] - while ([params])
+
+bork[params] - printf([params])
+
+
+---------------------------------------------------------------
+Operators
+
+not - !==
+and - &&
+or - ||
+next - ;
+as - =
+more - +=
+less - -=
+lots - *=
+few - /=
+bigger - >
+smaller - <
+biggerish - >=
+smallerish - <=
+
+---------------------------------------------------------------
+
