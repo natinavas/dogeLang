@@ -104,7 +104,6 @@ void define_value(char* command, int len){
 				j=0;
 			break;
 			case VALUE:
-			printf("hola\n");
 				value[j] = command[i];
 				j++;
 			break;
