@@ -25,9 +25,11 @@ int main(void){
 	char* hola = "very doge so words";
 	//define_charptr(hola, strlen(hola));
 	char* hola2 = "very doge so numbr";
+	char* hola7= "caaccac as dsf";
+	define_value(hola7, strlen(hola7));
 	//define_int(hola2, strlen(hola2));
 	char* hola3 = "doge is holalalalalla";
-	define_value(hola3, strlen(hola3));
+	//define_value(hola3, strlen(hola3));
 	// opening_bracket();
 // 	closing_bracket();
 // 	printf("\n");
@@ -92,6 +94,7 @@ void define_value(char* command, int len){
 		switch(state){
 			case VAR_NAME:
 				if(command[i] == ' '){
+					variable[j]=0;
 					state = IS;
 				}else{
 					variable[j]=command[i];
@@ -110,6 +113,7 @@ void define_value(char* command, int len){
 			
 		}
 	}
+	value[j]=0;
 	printf("%s = %s;\n",variable, value);
 	free(value);
 	free(variable);
