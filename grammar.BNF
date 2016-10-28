@@ -1,4 +1,4 @@
-<program>::=<statement><programend><end>|<programend><endline>
+<program>::=<statement><programend><endline>|<programend><endline>
 
 <statement>::=<statement><statement>|<assignment><endline>|<conditional>|<loop>|<definition><endline>
 
