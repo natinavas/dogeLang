@@ -29,10 +29,16 @@ returnValue		{operand}|{string}
 {intDefinition}				define_int();
 {stringDefinition}			define_str();
 
-{id}\ as\ ({int}|{string})		assign_value();
+{id}\ is\ ({int}|{string})		assign_value();
 
 rly\ {logicExpression}			if_statement();
 notrly\ {logicExpression} 		if_not_statement();
+but\ rly						printf("else if()");
+but\ not\ rly					printf("else if(!)");
+but								printf("else");
+wow								printf("{");
+woow							printf("}");
+\ next							printf(";");
 
 many\ {logicExpression}			while_loop();
 {id}\ {arithmeticOperator}\ {operand}	printf("artmetica\n");

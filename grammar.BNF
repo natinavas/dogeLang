@@ -1,0 +1,39 @@
+<program>::=<statement><programend><end>|<programend><endline>
+
+<statement>::=<statement><statement>|<assignment><endline>|<conditional>|<loop>|<definition><endline>
+
+<definition>::="very "<identifier>" is "<int_expr>" so numbr"|"very "<identifier>" is "<string>" so words"
+
+<assigment>::=<identifier>" "<arithmetic_operator>" "<int_expr>|<identifier>" is "<int_expr>|<identifier>" is "<string>
+
+<conditional>::=<if>|<if><elseif>|<if><elseif><else>
+
+<if>::="rly "<logical_expr> <openblock> <statement> <closeblock>|"notrly "<logical_expr> <openblock> <statement> <closeblock>
+
+<elseif>::=<elseif><elseif>|"but "<if>
+
+<else>::="but "<openblock> <statement> <closeblock>
+
+<loop>::="many "<logical_expr> <openblock> <statement> <closeblock>
+
+<openblock>::="wow"
+
+<closeblock>::"woow"
+
+<endline>::=" next"
+
+<identifier>::=id
+
+<programend>::="plz "<operand>" go to the moon"|"plz "<string>" go to the moon"
+
+<int_expr>::=int
+
+<string>::=string
+
+<operand>::=<identifier>|<int_expr>
+
+<logical_expr>::=<operand>" "<logic_operator>" "<operand>
+
+<logic_operator>::="not"|"and"|"or"|"bigger"|"smaller"|"biggerish"|"smallerish"
+
+<arithmetic_operator>::="more"|"less"|"lots"|"few"
