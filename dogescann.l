@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "dogescann.h"
 
 #define VAR_NAME 0
 #define IS 1
@@ -41,7 +42,7 @@ woow							printf("}");
 \ next							printf(";");
 
 many\ {logicExpression}			while_loop();
-{id}\ {arithmeticOperator}\ {operand}	printf("artmetica\n");
+{id}\ {arithmeticOperator}\ {operand}	arithmetic();
 
 plz\ {returnValue}\ go\ to\ the\ moon	return_statement();
 
@@ -57,7 +58,7 @@ void define_int(){
                 j++;
                 i++;
         }
-        printf("int %s;\n", var_name);
+        printf("int %s\n", var_name);
         free(var_name);
         return;
 }
@@ -71,12 +72,12 @@ void define_str(){
 		j++;
 		i++;
 	}
-	printf("char* %s;\n", var_name);
+	printf("char* %s\n", var_name);
 	free(var_name);
 	return;
 }
 
-void assign_value(char* yytext, int yyleng){
+void assign_value(){
 	int i=0, j=0;
 	int state = VAR_NAME; 
 	char* variable = malloc(yyleng - 4);
@@ -104,7 +105,7 @@ void assign_value(char* yytext, int yyleng){
 			
 		}
 	}
-	printf("%s = %s;\n",variable, value);
+	printf("%s = %s\n",variable, value);
 	free(value);
 	free(variable);
 	return;
@@ -112,7 +113,7 @@ void assign_value(char* yytext, int yyleng){
 }
 
 void while_loop(){
-	printf("while(%s);\n", yytext+4);
+	printf("while(%s)\n", yytext+4);
 }
 
 void if_statement(){
@@ -130,6 +131,10 @@ void return_statement(){
 	for(i = 4; yytext[i]!=' '; i++, j++){
 		value[j] = yytext[i];
 	}
-	printf("return %s;\n", value);
+	printf("return %s\n", value);
 	free(value);
+}
+
+void arithmetic(){
+	printf("%s\n", yytext);
 }

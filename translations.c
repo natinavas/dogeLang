@@ -23,29 +23,29 @@ void else_if_statement(char* command, int len);
 
 int main(void){
 	char* hola = "very doge so words";
-	//define_charptr(hola, strlen(hola));
+	define_charptr(hola, strlen(hola));
 	char* hola2 = "very doge so numbr";
 	char* hola7= "caaccac as dsf";
 	define_value(hola7, strlen(hola7));
-	//define_int(hola2, strlen(hola2));
+	define_int(hola2, strlen(hola2));
 	char* hola3 = "doge is holalalalalla";
-	//define_value(hola3, strlen(hola3));
-	// opening_bracket();
-// 	closing_bracket();
-// 	printf("\n");
+	define_value(hola3, strlen(hola3));
+	opening_bracket();
+	closing_bracket();
+	printf("\n");
 	char* hola4 = "plz hola go to the moon";
-	//return_statement(hola4, strlen(hola4));
+	return_statement(hola4, strlen(hola4));
 	
 	char* ifstat = "rly doge not true";
 	char* ifelsstat = "but rly doge not true";
-	char* notif = "notrly hi";
+	char* notif = "notrly hihhhhhiiii";
 	char* butt = "but helou";
 	
-	// if_statement(ifstat, strlen(ifstat));
-	// else_if_statement(ifelsstat, strlen(ifelsstat));
-	// if_not_statement(notif, strlen(notif));
-	// else_statement(butt, strlen(butt));
-	//
+	if_statement(ifstat, strlen(ifstat));
+	else_if_statement(ifelsstat, strlen(ifelsstat));
+	if_not_statement(notif, strlen(notif));
+	else_statement(butt, strlen(butt));
+
 	
 	
 	return 0;
