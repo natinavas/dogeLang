@@ -1081,7 +1081,7 @@ return yytext[0];
 case 25:
 YY_RULE_SETUP
 #line 51 "dogescan.l"
-yylval.f=atoi(yytext); return NUMBER;
+yylval.f=atoi(yytext); printf("el numero es %d\n", atoi(yytext)); return NUMBER;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
@@ -2099,5 +2099,6 @@ void yyfree (void * ptr )
 #define YYTABLES_NAME "yytables"
 
 #line 57 "dogescan.l"
+
 
 

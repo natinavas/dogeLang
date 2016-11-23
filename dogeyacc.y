@@ -41,29 +41,30 @@ void yyerror(const char *msg);
 
 
 %type <f> E F
-%left '+' '-'
-%left '*' '/'
+%left MORE LESS
+%left LOTS FEW
 
 %%
 
-S:	E	{printf("%f\n", $1);};
+S:	E	{printf("%d\n", $1);};
 
 
 
-
-E:	E MANY E {$$ = $1 * $3;}
+E:	E LOTS E {$$ = $1 * $3;}
 	|	E FEW E	{$$ = $1 / $3;}	
 	|	E LESS E {$$ = $1 - $3;}
 	|	E MORE E {$$ =$1 + $3;}
 	|	F	{$$ =$1;}
 	;
-/*E:	E 'less' T	{$$ = $1 - $3;}
-	|	E 'more' T {$$ = $1 + $3;}
+
+/*
+E:	E LESS T	{$$ = $1 - $3;}
+	|	E MORE T {$$ = $1 + $3;}
 	|	T {$$ = $1;}
 	;
 
-T: 	T 'lots' F {$$ = $1 * $3;}
-	|	E 'few' T {$$ = $1 / $3;}
+T: 	T LOTS F {$$ = $1 * $3;}
+	|	E FEW T {$$ = $1 / $3;}
 	|	F {$$ = $1;}
 	;
 */
