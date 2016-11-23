@@ -107,7 +107,7 @@ extern int yylex();
 typedef union YYSTYPE
 #line 9 "dogeyacc.y"
 {
-	float f;
+	int f;
 }
 /* Line 193 of yacc.c.  */
 #line 114 "y.tab.c"
@@ -1314,12 +1314,7 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 2:
-#line 20 "dogeyacc.y"
-    {printf("%f\n", (yyvsp[(1) - (1)].f));}
-    break;
-
-  case 3:
+        case 3:
 #line 25 "dogeyacc.y"
     {(yyval.f) = (yyvsp[(1) - (3)].f) * (yyvsp[(3) - (3)].f);}
     break;
@@ -1361,7 +1356,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 1365 "y.tab.c"
+#line 1360 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);

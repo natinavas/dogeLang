@@ -52,7 +52,7 @@
 typedef union YYSTYPE
 #line 9 "dogeyacc.y"
 {
-	float f;
+	int f;
 }
 /* Line 1529 of yacc.c.  */
 #line 59 "y.tab.h"

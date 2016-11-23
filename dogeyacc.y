@@ -7,7 +7,7 @@ extern int yylex();
 %}
 
 %union{
-	float f;
+	int f;
 }
 
 %token <f> NUMBER
@@ -17,7 +17,7 @@ extern int yylex();
 
 %%
 
-S:	E	{printf("%f\n", $1);};
+S:	E	//{printf("%f\n", $1);};
 
 
 
