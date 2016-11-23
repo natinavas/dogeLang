@@ -51,9 +51,9 @@ same					return SAME;
 
 [(){}]					return yytext[0];
 
-{number}				yylval=atoi(yytext); return NUMBER;
-{id}					yylval=yytext; return ID;
-{string}				yylval=atoi(yytext); return STRING;
+{number}				yylval.f=atoi(yytext); return NUMBER;
+{id}					yylval.s=yytext; return ID;
+{string}				yylval.s=strdup(yytext); return STRING;
 
 
 .						;

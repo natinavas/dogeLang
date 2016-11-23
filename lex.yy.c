@@ -929,17 +929,17 @@ return yytext[0];
 case 26:
 YY_RULE_SETUP
 #line 54 "dogescan.l"
-yylval=atoi(yytext); return NUMBER;
+yylval.f=atoi(yytext); return NUMBER;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 55 "dogescan.l"
-yylval=yytext; return ID;
+yylval.s=yytext; return ID;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 56 "dogescan.l"
-yylval=atoi(yytext); return STRING;
+yylval.s=strdup(yytext); return STRING;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP

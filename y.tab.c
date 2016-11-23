@@ -108,9 +108,10 @@ typedef union YYSTYPE
 #line 9 "dogeyacc.y"
 {
 	int f;
+	char* s;
 }
 /* Line 193 of yacc.c.  */
-#line 114 "y.tab.c"
+#line 115 "y.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -123,7 +124,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 127 "y.tab.c"
+#line 128 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -408,8 +409,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    20,    20,    25,    26,    27,    28,    29,    42,    43,
-      44
+       0,    21,    21,    26,    27,    28,    29,    30,    43,    44,
+      45
 };
 #endif
 
@@ -1315,48 +1316,48 @@ yyreduce:
   switch (yyn)
     {
         case 3:
-#line 25 "dogeyacc.y"
+#line 26 "dogeyacc.y"
     {(yyval.f) = (yyvsp[(1) - (3)].f) * (yyvsp[(3) - (3)].f);}
     break;
 
   case 4:
-#line 26 "dogeyacc.y"
+#line 27 "dogeyacc.y"
     {(yyval.f) = (yyvsp[(1) - (3)].f) / (yyvsp[(3) - (3)].f);}
     break;
 
   case 5:
-#line 27 "dogeyacc.y"
+#line 28 "dogeyacc.y"
     {(yyval.f) = (yyvsp[(1) - (3)].f) - (yyvsp[(3) - (3)].f);}
     break;
 
   case 6:
-#line 28 "dogeyacc.y"
+#line 29 "dogeyacc.y"
     {(yyval.f) =(yyvsp[(1) - (3)].f) + (yyvsp[(3) - (3)].f);}
     break;
 
   case 7:
-#line 29 "dogeyacc.y"
+#line 30 "dogeyacc.y"
     {(yyval.f) =(yyvsp[(1) - (1)].f);}
     break;
 
   case 8:
-#line 42 "dogeyacc.y"
+#line 43 "dogeyacc.y"
     { (yyval.f) = (yyvsp[(2) - (3)].f);}
     break;
 
   case 9:
-#line 43 "dogeyacc.y"
+#line 44 "dogeyacc.y"
     {(yyval.f) = -(yyvsp[(2) - (2)].f);}
     break;
 
   case 10:
-#line 44 "dogeyacc.y"
+#line 45 "dogeyacc.y"
     {(yyval.f) = (yyvsp[(1) - (1)].f);}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1360 "y.tab.c"
+#line 1361 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1570,7 +1571,7 @@ yyreturn:
 }
 
 
-#line 47 "dogeyacc.y"
+#line 48 "dogeyacc.y"
 
 
 /* Called by yyparse on error */

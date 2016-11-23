@@ -8,6 +8,7 @@ extern int yylex();
 
 %union{
 	int f;
+	char* s;
 }
 
 %token <f> NUMBER
