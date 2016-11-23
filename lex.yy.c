@@ -814,7 +814,7 @@ return SO;
 case 3:
 YY_RULE_SETUP
 #line 22 "dogescan.l"
-return DOGETYPE;
+yylval.s=yytext; return DOGETYPE;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
@@ -939,7 +939,7 @@ yylval.s=yytext; return ID;
 case 28:
 YY_RULE_SETUP
 #line 56 "dogescan.l"
-yylval.s=strdup(yytext); return STRING;
+yylval.s=yytext; return STRING;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
