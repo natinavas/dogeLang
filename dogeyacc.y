@@ -10,7 +10,7 @@ void addToMap();
 %}
 
 %union{
-	int f;
+	int n;
 	char* s;
 }
 
@@ -42,8 +42,7 @@ void addToMap();
 %token SAME
 
 
-%type <f> E T F S
-//%type <s> 
+%type <n> E T F
 %left MORE LESS
 %left LOTS FEW
 
@@ -54,18 +53,22 @@ def		:	VERY ID SO DOGETYPE		{addToMap();}
 		
 int_assign	:	ID IS arith_exp
 		;
-		
-string_assign	:	ID IS STRING
+
+*/
+	
+string_assign	:	ID IS STRING	{addToMap();printf("hola");}
+		;
+	
+
+
+
+arith_exp	:	E	{printf("resultado : %d", $1);}
 		;
 
-arith_exp	:	E
-		;*/
-
-S		:	E	{printf("resultado : %d", $1);};
 		
-E		:	E MORE T	{$$ =$1 + $3;}
+E		:	E MORE T	{$$ =$1 + $3; }
 		|	E LESS T	{$$ = $1 - $3;}
-		|	T			{$$ = $1;}
+		|	T			{$$ = $1;} 
 		;
 		
 T		:	T LOTS F	{$$ = $1 * $3;}

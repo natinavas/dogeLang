@@ -48,7 +48,7 @@ dogetype				numbr|words
 
 [(){}]					return yytext[0];
 
-{number}				yylval.f=atoi(yytext); printf("el numero es %d\n", atoi(yytext)); return NUMBER;
+{number}				yylval.n=atoi(yytext); printf("el numero es %d\n", atoi(yytext)); return NUMBER;
 {id}					yylval.s=yytext; return ID;
 {string}				yylval.s=yytext; return STRING;
 
