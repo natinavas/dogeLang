@@ -1,11 +1,13 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include "hashmap.h"
 //#include "dogescan.h"
 
 extern int yylex();
 void yyerror(const char *msg);
 void addToMap();
+static map_t map;
 
 %}
 
@@ -48,7 +50,7 @@ void addToMap();
 
 %%
 
-def		:	VERY ID SO DOGETYPE		{addToMap(); printf("hola dogetype of type %s\n", $4);}
+def		:	VERY ID SO DOGETYPE		{addToMap($2,$4); printf("hola dogetype of type %s\n", $4);}
 		;
 		
 int_assign	:	ID IS arith_exp		{addToMap();printf("hola numeros\n");}
@@ -90,10 +92,31 @@ void yyerror(const char *msg){
 }
 
 int main(void){
+	map = hashmap_new();
+
+	
+
 	yyparse();
 	return 0;
 }
 
 //TODO
-void addToMap(){
+void addToMap(char * id, char * type){
+	hashmap_put(map, id, type);
+
+	char * response;
+
+	hashmap_get(map, id, &response);
+
+	printf("respuesta: %s\n", response);
 }
+
+
+
+
+
+
+
+
+
+
