@@ -19,7 +19,7 @@ dogetype				numbr|words
 
 very					return VERY;
 so						return SO;
-dogetype				return DOGETYPE;
+dogetype				yylval.s=yytext; return DOGETYPE;
 is						return IS;
 
 more					return MORE;
@@ -53,7 +53,7 @@ same					return SAME;
 
 {number}				yylval.f=atoi(yytext); return NUMBER;
 {id}					yylval.s=yytext; return ID;
-{string}				yylval.s=strdup(yytext); return STRING;
+{string}				yylval.s=yytext; return STRING;
 
 
 .						;
