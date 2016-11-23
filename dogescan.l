@@ -12,7 +12,7 @@ id						[a-zA-Z][0-9a-zA-Z_]*
 string					\".*\"
 space					\ 
 whitespace				[\ \t\n\v\f]
-wss						whitespace*
+wss						{whitespace}*
 dogetype				numbr|words
 
 %%
@@ -53,6 +53,5 @@ dogetype				numbr|words
 {string}				yylval.s=yytext; return STRING;
 
 
-.						;
 
 %%
