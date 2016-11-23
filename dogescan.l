@@ -17,37 +17,34 @@ dogetype				numbr|words
 
 %%
 
-very					return VERY;
-so						return SO;
-dogetype				yylval.s=yytext; return DOGETYPE;
-is						return IS;
+{wss}very{wss}			return VERY;
+{wss}so{wss}			return SO;
+{wss}dogetype{wss}		yylval.s=yytext; return DOGETYPE;
+{wss}is{wss}			return IS;
 
-more					return MORE;
-less					return LESS;
-lots					return LOTS;
-few						return FEW;
+{wss}more{wss}			return MORE;
+{wss}less{wss}			return LESS;
+{wss}lots{wss}			return LOTS;
+{wss}few{wss}			return FEW;
 
-plz						return PLZ;
-go{wss}to{wss}the{wss}moon	return GOTOTHEMOON;
+{wss}plz{wss}			return PLZ;
+{wss}go{wss}to{wss}the{wss}moon{wss}	return GOTOTHEMOON;
 
-rly						return RLY;
-notrly					return NOTRLY;
-but						return BUT;
-many					return MANY;
+{wss}rly{wss}			return RLY;
+{wss}notrly{wss}		return NOTRLY;
+{wss}but{wss}			return BUT;
+{wss}many{wss}			return MANY;
 
-wow						return WOW;
-woow					return WOOW;
+{wss}not{wss}			return NOT;
+{wss}and{wss}			return AND;
+{wss}or{wss}			return OR;
+{wss}bigger{wss}		return BIGGER;
+{wss}smaller{wss}		return SMALLER;
+{wss}biggerish{wss}		return BIGGERISH;
+{wss}smallerish{wss}	return SMALLERISH;
+{wss}same{wss}			return SAME;
 
-not						return NOT;
-and						return AND;
-or						return OR;
-bigger					return BIGGER;
-smaller					return SMALLER;
-biggerish				return BIGGERISH;
-smallerish				return SMALLERISH;
-same					return SAME;
-
-
+{wss}next{wss}			return NEXT:
 
 [(){}]					return yytext[0];
 
