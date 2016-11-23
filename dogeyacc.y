@@ -5,6 +5,7 @@
 
 extern int yylex();
 void yyerror(const char *msg);
+void addToMap();
 %}
 
 %union{
@@ -46,57 +47,33 @@ void yyerror(const char *msg);
 
 %%
 
-/*S:	E	{printf("%d\n", $1);};
-
-
-
-E:	E LOTS E {$$ = $1 * $3;}
-	|	E FEW E	{$$ = $1 / $3;}	
-	|	E LESS E {$$ = $1 - $3;}
-	|	E MORE E {$$ =$1 + $3;}
-	|	F	{$$ =$1;}
-	;
-
-
-E:	E LESS T	{$$ = $1 - $3;}
-	|	E MORE T {$$ = $1 + $3;}
-	|	T {$$ = $1;}
-	;
-
-T: 	T LOTS F {$$ = $1 * $3;}
-	|	E FEW T {$$ = $1 / $3;}
-	|	F {$$ = $1;}
-	;
-
-
-F: '(' E ')' { $$ = $2;}
-	| NUMBER {$$ = $1;}
-	;*/
-
 def		:	VERY ID SO DOGETYPE
 		;
+		
 int_assign	:	ID IS arith_exp
 		;
+		
 string_assign	:	ID IS STRING
 		;
 
 arith_exp	:	E
 		;
-E		:	E MORE T
-		|	E LESS T
-		|	T
+		
+E		:	E MORE T	{$$ =$1 + $3;}
+		|	E LESS T	{$$ = $1 - $3;}
+		|	T			{$$ = $1;}
 		;
-T		:	T LOTS F
-		|	T FEW F
-		|	F
+		
+T		:	T LOTS F	{$$ = $1 * $3;}
+		|	T FEW F		{$$ = $1 / $3;}	
+		|	F			{$$ = $1;}
 		;
-F		:	'(' E ')'
-		|	NUM
-		|	ID
+		
+F		:	'(' E ')'	{ $$ = $2;}
+		|	NUMBER		{$$ = $1;}
+		|	ID			{addToMap();}
 		|	E
 		;
-
-
 
 %%
 
@@ -109,4 +86,8 @@ void yyerror(const char *msg){
 int main(void){
 	yyparse();
 	return 0;
+}
+
+//TODO
+void addToMap(){
 }
