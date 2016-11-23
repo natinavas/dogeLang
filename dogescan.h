@@ -1,1 +1,1 @@
-enum tokens {NUMBER, STRING, ID};
+enum tokens {STRING, ID};
