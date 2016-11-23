@@ -14,7 +14,7 @@ void addToMap();
 	char* s;
 }
 
-%token <f> NUMBER
+%token <n> NUMBER
 %token <s> ID
 %token <s> STRING
 %token VERY
@@ -47,22 +47,22 @@ void addToMap();
 %left LOTS FEW
 
 %%
-/*
-def		:	VERY ID SO DOGETYPE		{addToMap();}
+
+def		:	VERY ID SO DOGETYPE		{addToMap(); printf("hola dogetype \n");}
 		;
 		
-int_assign	:	ID IS arith_exp
+int_assign	:	ID IS arith_exp		{addToMap();printf("hola numeros\n");}
 		;
 
-*/
+
 	
-string_assign	:	ID IS STRING	{addToMap();printf("hola");}
+string_assign	:	ID IS STRING	{addToMap();printf("hola\n");}
 		;
 	
 
 
 
-arith_exp	:	E	{printf("resultado : %d", $1);}
+arith_exp	:	E	{printf("resultado : %d\n", $1);}
 		;
 
 		
