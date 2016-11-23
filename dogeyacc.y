@@ -47,7 +47,7 @@ void addToMap();
 
 %%
 
-def		:	VERY ID SO DOGETYPE
+def		:	VERY ID SO DOGETYPE		{addToMap();}
 		;
 		
 int_assign	:	ID IS arith_exp
@@ -71,7 +71,7 @@ T		:	T LOTS F	{$$ = $1 * $3;}
 		
 F		:	'(' E ')'	{ $$ = $2;}
 		|	NUMBER		{$$ = $1;}
-		|	ID			{addToMap();}
+		|	ID			
 		|	E
 		;
 
