@@ -22,7 +22,7 @@ dogetype				numbr|words
 {wss}dogetype{wss}		yylval.s=yytext; return DOGETYPE;
 {wss}is{wss}			return IS;
 
-{wss}more{wss}			return MORE;
+{wss}more{wss}			printf("moooooore\n"); return MORE;
 {wss}less{wss}			return LESS;
 {wss}lots{wss}			return LOTS;
 {wss}few{wss}			return FEW;
@@ -48,7 +48,7 @@ dogetype				numbr|words
 
 [(){}]					return yytext[0];
 
-{number}				yylval.f=atoi(yytext); printf("el numero es %d\n", yytext); return NUMBER;
+{number}				yylval.f=atoi(yytext); printf("el numero es %d\n", atoi(yytext)); return NUMBER;
 {id}					yylval.s=yytext; return ID;
 {string}				yylval.s=yytext; return STRING;
 

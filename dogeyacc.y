@@ -6,6 +6,7 @@
 extern int yylex();
 void yyerror(const char *msg);
 void addToMap();
+
 %}
 
 %union{
@@ -41,12 +42,13 @@ void addToMap();
 %token SAME
 
 
-%type <f> E F
+%type <f> E T F
+//%type <s> 
 %left MORE LESS
 %left LOTS FEW
 
 %%
-
+/*
 def		:	VERY ID SO DOGETYPE		{addToMap();}
 		;
 		
@@ -57,7 +59,7 @@ string_assign	:	ID IS STRING
 		;
 
 arith_exp	:	E
-		;
+		;*/
 		
 E		:	E MORE T	{$$ =$1 + $3;}
 		|	E LESS T	{$$ = $1 - $3;}
@@ -71,8 +73,7 @@ T		:	T LOTS F	{$$ = $1 * $3;}
 		
 F		:	'(' E ')'	{ $$ = $2;}
 		|	NUMBER		{$$ = $1;}
-		|	ID			
-		|	E
+//		|	ID
 		;
 
 %%
