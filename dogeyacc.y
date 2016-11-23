@@ -42,7 +42,7 @@ void addToMap();
 %token SAME
 
 
-%type <f> E T F
+%type <f> E T F S
 //%type <s> 
 %left MORE LESS
 %left LOTS FEW
@@ -60,6 +60,8 @@ string_assign	:	ID IS STRING
 
 arith_exp	:	E
 		;*/
+
+S		:	E	{printf("resultado : %d", $1);};
 		
 E		:	E MORE T	{$$ =$1 + $3;}
 		|	E LESS T	{$$ = $1 - $3;}
