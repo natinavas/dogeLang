@@ -19,7 +19,7 @@ void addToMap();
 %token <s> STRING
 %token VERY
 %token SO
-%token DOGETYPE
+%token <s> DOGETYPE
 %token IS
 %token MORE
 %token LESS
@@ -48,7 +48,7 @@ void addToMap();
 
 %%
 
-def		:	VERY ID SO DOGETYPE		{addToMap(); printf("hola dogetype \n");}
+def		:	VERY ID SO DOGETYPE		{addToMap(); printf("hola dogetype of type %s\n", $4);}
 		;
 		
 int_assign	:	ID IS arith_exp		{addToMap();printf("hola numeros\n");}
