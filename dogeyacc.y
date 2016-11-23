@@ -46,7 +46,7 @@ void yyerror(const char *msg);
 
 %%
 
-S:	E	//{printf("%f\n", $1);};
+S:	E	{printf("%f\n", $1);};
 
 
 

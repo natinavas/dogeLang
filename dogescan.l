@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "dogescan.h"
 #include "y.tab.h"
 %}
 %option nounistd
+%option noyywrap
 
 number					[0-9]+
 id						[a-zA-Z][0-9a-zA-Z_]*
@@ -44,7 +44,7 @@ dogetype				numbr|words
 {wss}smallerish{wss}	return SMALLERISH;
 {wss}same{wss}			return SAME;
 
-{wss}next{wss}			return NEXT:
+{wss}next{wss}			return NEXT;
 
 [(){}]					return yytext[0];
 
