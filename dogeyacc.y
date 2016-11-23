@@ -13,6 +13,33 @@ void yyerror(const char *msg);
 }
 
 %token <f> NUMBER
+%token <s> ID
+%token <s> STRING
+%token VERY
+%token SO
+%token DOGETYPE
+%token IS
+%token MORE
+%token LESS
+%token LOTS
+%token FEW
+%token PLZ
+%token GOTOTHEMOON
+%token RLY
+%token NOTRLY
+%token BUT
+%token MANY
+%token NEXT
+%token NOT
+%token AND
+%token OR
+%token BIGGER
+%token SMALLER
+%token BIGGERISH
+%token SMALLERISH
+%token SAME
+
+
 %type <f> E F
 %left '+' '-'
 %left '*' '/'
@@ -45,6 +72,9 @@ F: '(' E ')' { $$ = $2;}
 	| '-' F {$$ = -$2;}
 	| NUMBER {$$ = $1;}
 	;
+
+
+
 
 %%
 

@@ -39,11 +39,17 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     NUMBER = 258
+     NUMBER = 258,
+     ID = 259,
+     STRING = 260,
+     VERY = 261
    };
 #endif
 /* Tokens.  */
 #define NUMBER 258
+#define ID 259
+#define STRING 260
+#define VERY 261
 
 
 
@@ -56,7 +62,7 @@ typedef union YYSTYPE
 	char* s;
 }
 /* Line 1529 of yacc.c.  */
-#line 60 "y.tab.h"
+#line 66 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
