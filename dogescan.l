@@ -55,8 +55,6 @@ same					return SAME;
 {string}				return STRING;
 
 
-
-\n                      /* ignore end of line */;
-[ \t]+                  /* ignore whitespace */;
+.						;
 
 %%
