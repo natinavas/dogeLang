@@ -50,7 +50,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 9 "dogeyacc.y"
+#line 10 "dogeyacc.y"
 {
 	int f;
 	char* s;

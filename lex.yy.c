@@ -1092,6 +1092,14 @@ yylval.s=yytext; return STRING;
 case 28:
 YY_RULE_SETUP
 #line 56 "dogescan.l"
+<<<<<<< HEAD
+=======
+yylval.s=yytext; return STRING;
+	YY_BREAK
+case 29:
+YY_RULE_SETUP
+#line 59 "dogescan.l"
+>>>>>>> 6589f8ead146ab8f0566f7ef02f476b3831984db
 ;
 	YY_BREAK
 case 29:

@@ -4,6 +4,7 @@
 //#include "dogescan.h"
 
 extern int yylex();
+void yyerror(const char *msg);
 %}
 
 %union{
@@ -48,10 +49,10 @@ F: '(' E ')' { $$ = $2;}
 %%
 
 /* Called by yyparse on error */
-/*void yyerror(char *msg){
+void yyerror(const char *msg){
 	fprintf(stderr, "%s\n", msg);
 	exit(1);
-}*/
+}
 
 int main(void){
 	yyparse();
