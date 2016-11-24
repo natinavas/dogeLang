@@ -13,6 +13,7 @@ string					\".*\"
 space					\ 
 whitespace				[\ \t\n\v\f]
 wss						{whitespace}*
+shh						shh.*shh
 
 %%
 
@@ -45,6 +46,8 @@ wss						{whitespace}*
 {wss}same{wss}			return SAME;
 
 {wss}next{wss}			return NEXT;
+
+{shh}					yylval.s=yytext; return SHH;
 
 [(){}]					return yytext[0];
 

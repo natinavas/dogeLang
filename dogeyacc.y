@@ -61,6 +61,7 @@ typedef struct entry_value{
 %token BIGGERISH
 %token SMALLERISH
 %token SAME
+%token <s> SHH
 
 
 %type <n> ea ta fa el tl fl logic_exp relational_exp arith_exp
@@ -83,14 +84,17 @@ command		:	def
 			|	arith_exp
 			|	condition 	{printf("hola condition\n");}
 			|	loop
+			|	comment
 			;
+
+comment		:	SHH			{printf("El comentario es %s\n", $1);}
 
 				
 condition 	:	RLY logic_exp '{' commands '}'	{printf("no voy al but\n");}
 			|	RLY logic_exp '{' commands '}' BUT els {printf("voy al but\n");}
 			;
 
-els		:	condition	{printf("butbutbut\n");}
+els			:	condition	{printf("butbutbut\n");}
 			|	'{' commands '}'
 			|
 			;
