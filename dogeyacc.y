@@ -96,18 +96,18 @@ gotothemoon :	PLZ ID GOTOTHEMOON {printf("go to the moon variable\n");}
 			;
 
 
-def		:	VERY ID SO WORDS		{addToMap($2,0); printf("hola dogetype of type words\n");}
-		|	VERY ID SO NUMBR		{addToMap($2,1); printf("hola dogetype of type number\n");}
+def		:	VERY ID SO WORDS		{addToMap($2,1); printf("hola dogetype of type words : %s\n", $2);}
+		|	VERY ID SO NUMBR		{addToMap($2,0); printf("hola dogetype of type number : %s\n", $2);}
 		;
 
 
 		
-int_assign	:	ID IS arith_exp		{addToMap();printf("hola numeros\n");}
+int_assign	:	ID IS arith_exp		{assignNumber($1, $3);printf("hola numeros\n");}
 		;
 
 
 	
-string_assign	:	ID IS STRING	{addToMap();printf("hola\n");}
+string_assign	:	ID IS STRING	{assignWords($1, $3);printf("hola\n");}
 		;
 	
 
@@ -171,15 +171,18 @@ int main(void){
 //TODO
 void addToMap(char * id, int type){
 
+	id = "hola";
 
 	entry_value * response;
 
 	entry_value entry;
 	entry.block = block;
-	type = type;
+	entry.type = type;
+
+	printf("el tipo es :       %d\n\n", type);
 
 
-	printf("entre %s\n", id);
+	printf("%s\n", id);
 
 	if(hashmap_get(map, id, &response) == MAP_OK) {
 		yyerror("same variable declared twice :(\n");
@@ -193,16 +196,57 @@ void addToMap(char * id, int type){
 	hashmap_get(map, id, &response);
 
 	printf("respuesta: %d\n", response->type);
+
+	printf("map size : %d\n", hashmap_length(map));
+
 }
 
 void assignNumber(char * id, int number) {
 
+	entry_value *entry;
 
+	id = "hola";
+
+	if(hashmap_get(map, id, &entry) == MAP_MISSING) {
+		yyerror("the variable does not exist :(\n");
+	}
+
+	
+	if(entry->type != 0) {
+		yyerror("invalid assignment. Type of variable is not numbr :(\n");
+	}
+
+	hashmap_remove(map, id);
+
+	entry->content.number = number;
+
+	hashmap_put(map, id, &entry);
+
+	printf("%s ahora vale : %d", id, number);
 
 }
 
-void assignString() {
+void assignWords(char * id, char * s) {
 
+	entry_value entry;
+
+	id = "hola";
+
+	if(hashmap_get(map, id, &entry) == MAP_MISSING) {
+		yyerror("the variable does not exist :(\n");
+	}
+	
+	if(entry.type != STR) {
+		yyerror("invalid assignment. Type of variable is not words :(\n");
+	}
+
+	hashmap_remove(map, id);
+
+	entry.content.number = s;
+
+	hashmap_put(map, id, &entry);
+
+	printf("%s ahora vale : %d", id, s);
 
 }
 
