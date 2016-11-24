@@ -106,16 +106,17 @@ commands	:	command commands	{$$ = append($1, $2);}
 			| /*lambda*/
 			;
 
-command		:	def  {$$ = $1}
-			|	int_assign	{$$ = $1}
-			|	string_assign	{$$ = $1}
-			|	arith_exp	{$$ = $1}
-			|	condition	{$$ = $1}
-			|	loop	{$$ = $1}
+command		:	def  {$$ = $1;}
+			|	int_assign	{$$ = $1;}
+			|	string_assign	{$$ = $1;}
+			|	arith_exp	{$$ = $1;}
+			|	condition	{$$ = $1;}
+			|	loop	{$$ = $1;}
 			|	comment
 			;
 
 comment		:	SHH
+			;
 
 condition 	:
 			RLY logic_exp '{' commands '}'{
@@ -123,9 +124,7 @@ condition 	:
 					aux = triAppend(aux, $4, "}");
 					$$ = aux;
 			}
-
 			|
-
 			RLY logic_exp '{' commands '}' BUT els{
 				char* aux = triAppend("if(", $2, "){");
 				char* aux2 = triAppend($4, "}", "else ");
