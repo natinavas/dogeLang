@@ -82,19 +82,19 @@ command		:	def
 			|	int_assign
 			|	string_assign
 			|	arith_exp
-			|	condition 	{printf("hola condition\n");}
+			|	condition
 			|	loop
 			|	comment
 			;
 
-comment		:	SHH			{printf("El comentario es %s\n", $1);}
+comment		:	SHH
 
 				
-condition 	:	RLY logic_exp '{' commands '}'	{printf("no voy al but\n");}
-			|	RLY logic_exp '{' commands '}' BUT els {printf("voy al but\n");}
+condition 	:	RLY logic_exp '{' commands '}'
+			|	RLY logic_exp '{' commands '}' BUT els
 			;
 
-els			:	condition	{printf("butbutbut\n");}
+els			:	condition
 			|	'{' commands '}'
 			|
 			;
@@ -123,7 +123,7 @@ string_assign	:	ID IS STRING	{assignWords($1, $3);printf("hola\n");}
 
 
 
-arith_exp	:	ea	{printf("resultado : %d\n", $1);}
+arith_exp	:	ea
 			;
 
 		
@@ -142,7 +142,7 @@ fa		:	'(' ea ')'	{ $$ = $2;}
 		|	ID			{$$ = $1;}
 		;
 
-logic_exp	:	el		{$$ = $1; printf("resultado : %d\n", $1);}
+logic_exp	:	el		{$$ = $1;}
 		;
 el		:	el OR tl	{$$ = $1 || $3;}
 		|	tl		{$$ = $1;}

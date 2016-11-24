@@ -23,7 +23,7 @@ shh						shh.*shh
 {wss}numbr{wss}			yylval.s=yytext; return NUMBR;
 {wss}is{wss}			return IS;
 
-{wss}more{wss}			printf("MOOORE\n"); return MORE;
+{wss}more{wss}			return MORE;
 {wss}less{wss}			return LESS;
 {wss}lots{wss}			return LOTS;
 {wss}few{wss}			return FEW;
@@ -33,13 +33,13 @@ shh						shh.*shh
 
 {wss}rly{wss}			return RLY;
 {wss}notrly{wss}		return NOTRLY;
-{wss}but{wss}			printf("butttttt\n");return BUT;
+{wss}but{wss}			return BUT;
 {wss}many{wss}			return MANY;
 
 {wss}not{wss}			return NOT;
 {wss}and{wss}			return AND;
 {wss}or{wss}			return OR;
-{wss}bigger{wss}		printf("bigger!!\n"); return BIGGER;
+{wss}bigger{wss}		return BIGGER;
 {wss}smaller{wss}		return SMALLER;
 {wss}biggerish{wss}		return BIGGERISH;
 {wss}smallerish{wss}	return SMALLERISH;
@@ -51,9 +51,9 @@ shh						shh.*shh
 
 [(){}]					return yytext[0];
 
-{number}				yylval.n=atoi(yytext); printf("numero es: %d", atoi(yytext)); return NUMBER;
+{number}				yylval.n=atoi(yytext); return NUMBER;
 {id}					yylval.s=yytext; return ID;
-{string}				yylval.s=yytext; return STRING; printf("encontre un id %s\n", yytext);
+{string}				yylval.s=yytext; return STRING;
 
 
 
