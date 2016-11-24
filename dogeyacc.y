@@ -85,42 +85,42 @@ command		:	def
 			|	loop
 			;
 
-				//necesitamos {}???
-condition 	:	RLY logic_exp command	{printf("no voy al but\n");}
-			|	RLY logic_exp BUT els {printf("voy al but\n");}
+				
+condition 	:	RLY logic_exp '{' commands '}'	{printf("no voy al but\n");}
+			|	RLY logic_exp BUT else {printf("voy al but\n");}
 			;
 
-els	:	condition	{printf("butbutbut\n");}
-	|	command
-	|
-	;
+else		:	condition	{printf("butbutbut\n");}
+			|	'{' commands '}'
+			|
+			;
 
-loop :	MANY logic_exp command
-	 ;
+loop 		:	MANY logic_exp '{' commands '}'
+	 		;
 
 gotothemoon :	PLZ arith_exp GOTOTHEMOON {printf("go to the moon variable\n");}
 			;
 
 
-def		:	VERY ID SO WORDS		{addToMap($2,1); printf("hola dogetype of type words : %s\n", $2);}
-		|	VERY ID SO NUMBR		{addToMap($2,0); printf("hola dogetype of type number : %s\n", $2);}
-		;
+def			:	VERY ID SO WORDS		{addToMap($2,1); printf("hola dogetype of type words : %s\n", $2);}
+			|	VERY ID SO NUMBR		{addToMap($2,0); printf("hola dogetype of type number : %s\n", $2);}
+			;
 
 
 		
-int_assign	:	ID IS arith_exp		{assignNumber($1, $3);printf("hola numeros\n");}
-		;
+int_assign		:	ID IS arith_exp		{assignNumber($1, $3);printf("hola numeros\n");}
+				;
 
 
 	
 string_assign	:	ID IS STRING	{assignWords($1, $3);printf("hola\n");}
-		;
+				;
 	
 
 
 
 arith_exp	:	ea	{printf("resultado : %d\n", $1);}
-		;
+			;
 
 		
 ea		:	ea MORE ta	{$$ =$1 + $3; }
