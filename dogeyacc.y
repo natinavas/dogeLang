@@ -87,7 +87,7 @@ command		:	def
 
 				
 condition 	:	RLY logic_exp '{' commands '}'	{printf("no voy al but\n");}
-			|	RLY logic_exp BUT else {printf("voy al but\n");}
+			|	RLY logic_exp '{' commands '}' BUT else {printf("voy al but\n");}
 			;
 
 else		:	condition	{printf("butbutbut\n");}
