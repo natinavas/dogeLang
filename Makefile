@@ -6,7 +6,7 @@ $(TARGET):
 
 all:
 	lex dogescan.l
-	yacc -Wno -d dogeyacc.y
+	yacc -d dogeyacc.y
 	cc lex.yy.c y.tab.c hashmap.c -o dogescan
 
 clean:
