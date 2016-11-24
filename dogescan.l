@@ -32,7 +32,7 @@ wss						{whitespace}*
 
 {wss}rly{wss}			return RLY;
 {wss}notrly{wss}		return NOTRLY;
-{wss}but{wss}			return BUT;
+{wss}but{wss}			printf("butttttt\n");return BUT;
 {wss}many{wss}			return MANY;
 
 {wss}not{wss}			return NOT;

@@ -80,17 +80,17 @@ command		:	def
 			|	int_assign
 			|	string_assign
 			|	arith_exp
-			|	condition
+			|	condition 	{printf("hola condition\n");}
 			|	loop
 			;
 
 				//necesitamos {}???
-condition 	:	RLY logic_exp command
-			|	RLY logic_exp els
+condition 	:	RLY logic_exp command	{printf("no voy al but\n");}
+			|	RLY logic_exp BUT els {printf("voy al but\n");}
 			;
 
-els	:	BUT condition
-	|	BUT command
+els	:	condition	{printf("butbutbut\n");}
+	|	command
 	|
 	;
 
