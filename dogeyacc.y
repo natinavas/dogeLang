@@ -8,6 +8,21 @@ extern int yylex();
 void yyerror(const char *msg);
 void addToMap();
 static map_t map;
+static int block;
+
+enum var_type {NUM, STR};
+
+typedef union var_content{
+	int number;
+	char * string;
+}var_content;
+
+typedef struct entry_value{
+	int block;
+	int type;
+	var_content content;
+}entry_value;
+
 
 %}
 
@@ -21,7 +36,8 @@ static map_t map;
 %token <s> STRING
 %token VERY
 %token SO
-%token <s> DOGETYPE
+%token WORDS
+%token NUMBR
 %token IS
 %token MORE
 %token LESS
@@ -80,8 +96,11 @@ gotothemoon :	PLZ ID GOTOTHEMOON {printf("go to the moon variable\n");}
 			;
 
 
-def		:	VERY ID SO DOGETYPE		{addToMap($2,$4); printf("hola dogetype of type %s\n", $4);}
+def		:	VERY ID SO WORDS		{addToMap($2,0); printf("hola dogetype of type words\n");}
+		|	VERY ID SO NUMBR		{addToMap($2,1); printf("hola dogetype of type number\n");}
 		;
+
+
 		
 int_assign	:	ID IS arith_exp		{addToMap();printf("hola numeros\n");}
 		;
@@ -150,22 +169,40 @@ int main(void){
 }
 
 //TODO
-void addToMap(char * id, char * type){
-	hashmap_put(map, id, type);
+void addToMap(char * id, int type){
 
-	char * response;
+
+	entry_value * response;
+
+	entry_value entry;
+	entry.block = block;
+	type = type;
+
+
+	printf("entre %s\n", id);
+
+	if(hashmap_get(map, id, &response) == MAP_OK) {
+		yyerror("same variable declared twice :(\n");
+	}
+
+	printf("sali\n");
+
+
+	hashmap_put(map, id, &entry);
 
 	hashmap_get(map, id, &response);
 
-	printf("respuesta: %s\n", response);
+	printf("respuesta: %d\n", response->type);
 }
 
+void assignNumber(char * id, int number) {
 
 
 
+}
+
+void assignString() {
 
 
-
-
-
+}
 
