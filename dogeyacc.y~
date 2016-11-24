@@ -44,7 +44,7 @@ static map_t map;
 %token SAME
 
 
-%type <n> ea ta fa el tl fl logic_exp relational_exp arith_exp
+%type <n> ea ta fa el tl fl logic_exp relational_exp
 %left MORE LESS
 %left LOTS FEW
 
@@ -83,7 +83,7 @@ fa		:	'(' ea ')'	{ $$ = $2;}
 //		|	ID
 		;
 
-logic_exp	:	el		{$$ = $1; printf("resultado : %d\n", $1);}
+logic_exp	:	el		{$$ = $1}
 		;
 el		:	el OR tl	{$$ = $1 || $3}
 		|	tl		{$$ = $1}
