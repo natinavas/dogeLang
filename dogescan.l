@@ -10,7 +10,7 @@
 number					[0-9]+
 id						[a-zA-Z][0-9a-zA-Z_]*
 string					\".*\"
-space					\ 
+space					\
 whitespace				[\ \t\n\v\f]
 wss						{whitespace}*
 shh						shh.*shh
@@ -51,7 +51,7 @@ shh						shh.*shh
 
 [(){}]					return yytext[0];
 
-{number}				yylval.n=atoi(yytext); return NUMBER;
+{number}				yylval.s=yytext; return NUMBER;
 {id}					yylval.s=yytext; return ID;
 {string}				yylval.s=yytext; return STRING;
 

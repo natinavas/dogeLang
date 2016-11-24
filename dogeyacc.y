@@ -13,13 +13,14 @@ void addToMap();
 char* append(char* s1, char* s2);
 char* triAppend(char* s1, char* s2, char* s3);
 char* quadAppend(char* s1, char* s2, char* s3, char* s4);
-static map_t map;
+static Map map;
 static int block;
 
 //TODO meter en limitaiciones del informe esto de los mallocs
 char* append(char* s1, char* s2){
 		char* s = malloc(strlen(s1) + strlen(s2) + 1);
 		s[0] = '\0'; //will be overwritten by strcat
+
 		strcat(s, s1);
 		strcat(s, s2);
 		return s;
@@ -65,7 +66,7 @@ typedef struct entry_value{
 	char* s;
 }
 
-%token <n> NUMBER
+%token <s> NUMBER
 %token <s> ID
 %token <s> STRING
 %token VERY
@@ -95,18 +96,22 @@ typedef struct entry_value{
 %token <s> SHH
 
 
-%type <n> ea ta fa el tl fl logic_exp relational_exp arith_exp
-%type <s> command condition els
+%type <s> ea ta fa el tl fl logic_exp relational_exp arith_exp
+%type <s> command condition els gotothemoon commands def int_assign string_assign comment loop
 %left MORE LESS
 %left LOTS FEW
 
+%start program
+
 %%
 
-program		:	commands gotothemoon	{printf("int main(){%s}", append($1, $2));}
+program		:	commands gotothemoon	{printf("hola main\n");printf("int main(){%s}", append($1, $2));}
 			;
 
-commands	:	command commands	{$$ = append($1, $2);}
-			| /*lambda*/
+commands	:	command commands	{printf("lista de comandos\n");$$ = append($1, $2);}
+			| /*lambda*/{
+				$$ = "";
+			}
 			;
 
 command		:	def  {$$ = $1;}
@@ -123,9 +128,9 @@ comment		:	SHH
 
 condition 	:
 			RLY logic_exp '{' commands '}'{
-					char* aux = triAppend("if(", $2, "){");
-					aux = triAppend(aux, $4, "}");
-					$$ = aux;
+				char* aux = triAppend("if(", $2, "){");
+				aux = triAppend(aux, $4, "}");
+				$$ = aux;
 			}
 			|
 			RLY logic_exp '{' commands '}' BUT els{
@@ -143,7 +148,9 @@ els			:
 			'{' commands '}' {
 				char* aux = triAppend("{", $2, "}");
 			}
-			| /*lambda*/
+			| /*lambda*/ {
+				$$ = "";
+			}
 			;
 
 
@@ -190,11 +197,12 @@ string_assign	:
 				}
 				;
 
-arith_exp	:	ea	{$$ = $1}
+arith_exp	:	ea	{$$ = $1;}
 			;
 
 ea		:
 		ea MORE ta	{
+			printf("moreeee\n");
 			$$ = triAppend($1, "+", $3);
 		}
 		|
@@ -216,7 +224,7 @@ ta		:
 		;
 
 fa		:	'(' ea ')'	{ $$ = $2;}
-		|	NUMBER		{$$ = $1;}
+		|	NUMBER		{printf("numerooo %s\n", $1);$$ = $1;}
 		|	ID			{$$ = $1;}
 		;
 
@@ -275,7 +283,9 @@ void yyerror(const char *msg){
 }
 
 int main(void){
-	map = hashmap_new();
+	printf("hola1\n" );
+	map = newMap();
+	printf("hola2\n" );
 
 
 
@@ -323,7 +333,7 @@ void assignNumber(char * id, int number) {
 	}
 
 	entry_value = getValue(map, id);
-	
+
 	if(entry_value->type != 0) {
 		yyerror("invalid assignment. Type of variable is not numbr :(\n");
 	}
@@ -350,7 +360,7 @@ void assignWords(char * id, char * s) {
 	}
 
 	entry_value = getValue(map, id);
-	
+
 	if(entry_value->type != 1) {
 		yyerror("invalid assignment. Type of variable is not numbr :(\n");
 	}
