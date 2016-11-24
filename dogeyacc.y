@@ -50,6 +50,36 @@ static map_t map;
 
 %%
 
+program	:	command gotothemoon
+		;
+
+command	:	def
+		|	int_assign
+		|	string_assign
+		|	arith_exp
+		|	condition
+		|	loop
+		|	command command
+		|
+		;
+
+				//necesitamos {}???
+condition :		RLY logic_exp command
+			|	RLY logic_exp els
+			;
+
+els	:	BUT condition
+	|	BUT command
+	|
+	;
+
+loop :	MANY logic_exp command
+	 ;
+
+gotothemoon :	PLZ ID GOTOTHEMOON {printf("go to the moon variable\n");}
+			;
+
+
 def		:	VERY ID SO DOGETYPE		{addToMap($2,$4); printf("hola dogetype of type %s\n", $4);}
 		;
 		
@@ -85,21 +115,21 @@ fa		:	'(' ea ')'	{ $$ = $2;}
 
 logic_exp	:	el		{$$ = $1; printf("resultado : %d\n", $1);}
 		;
-el		:	el OR tl	{$$ = $1 || $3}
-		|	tl		{$$ = $1}
+el		:	el OR tl	{$$ = $1 || $3;}
+		|	tl		{$$ = $1;}
 		;
-tl		:	tl AND fl	{$$ = $1 && $3}
-		|	fl		{$$ = $1}
+tl		:	tl AND fl	{$$ = $1 && $3;}
+		|	fl		{$$ = $1;}
 		;
-fl		:	NOT relational_exp	{$$ = !$2}
-		|	relational_exp		{$$ = $1}
-		|	'(' el ')'		{$$ = $2}
+fl		:	NOT relational_exp	{$$ = !$2;}
+		|	relational_exp		{$$ = $1;}
+		|	'(' el ')'		{$$ = $2;}
 
-relational_exp	:	arith_exp BIGGER arith_exp	{$$ = $1 > $3}
-		|	arith_exp SMALLER arith_exp	{$$ = $1 < $3}
-		|	arith_exp BIGGERISH arith_exp	{$$ = $1 >= $3}
-		|	arith_exp SMALLERISH arith_exp	{$$ = $1 <= $3}
-		|	arith_exp SAME arith_exp	{$$ = $1 == $3}
+relational_exp	:	arith_exp BIGGER arith_exp	{$$ = $1 > $3;}
+		|	arith_exp SMALLER arith_exp	{$$ = $1 < $3;}
+		|	arith_exp BIGGERISH arith_exp	{$$ = $1 >= $3;}
+		|	arith_exp SMALLERISH arith_exp	{$$ = $1 <= $3;}
+		|	arith_exp SAME arith_exp	{$$ = $1 == $3;}
 		;
 
 %%
