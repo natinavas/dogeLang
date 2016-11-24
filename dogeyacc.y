@@ -6,6 +6,8 @@
 
 extern int yylex();
 void yyerror(const char *msg);
+void assignWords(char * id, char * s);
+void assignNumber(char * id, int number);
 void addToMap();
 static map_t map;
 static int block;
@@ -105,12 +107,12 @@ def		:	VERY ID SO WORDS		{addToMap($2,1); printf("hola dogetype of type words : 
 
 
 		
-int_assign	:	ID IS arith_exp		//{assignNumber($1, $3);printf("hola numeros\n");}
+int_assign	:	ID IS arith_exp		{assignNumber($1, $3);printf("hola numeros\n");}
 		;
 
 
 	
-string_assign	:	ID IS STRING	//{assignWords($1, $3);printf("hola\n");}
+string_assign	:	ID IS STRING	{assignWords($1, $3);printf("hola\n");}
 		;
 	
 
