@@ -6,7 +6,7 @@
 %}
 %option nounistd
 %option noyywrap
-
+%option yylineno
 number					[0-9]+
 id						[a-zA-Z][0-9a-zA-Z_]*
 string					\".*\"

@@ -5,6 +5,7 @@
 //#include "dogescan.h"
 
 extern int yylex();
+extern int yylineno;
 void yyerror(const char *msg);
 void assignWords(char * id, char * s);
 void assignNumber(char * id, int number);
@@ -160,7 +161,7 @@ relational_exp	:	arith_exp BIGGER arith_exp	{$$ = $1 > $3;}
 
 /* Called by yyparse on error */
 void yyerror(const char *msg){
-	fprintf(stderr, "%s\n", msg);
+	fprintf(stderr, "Error at line [%d]: %s\n", yylineno, msg);
 	exit(1);
 }
 
