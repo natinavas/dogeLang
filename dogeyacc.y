@@ -10,6 +10,9 @@ void yyerror(const char *msg);
 void assignWords(char * id, char * s);
 void assignNumber(char * id, int number);
 void addToMap();
+char* append(char* s1, char* s2);
+char* triAppend(char* s1, char* s2, char* s3);
+char* quadAppend(char* s1, char* s2, char* s3, char* s4);
 static map_t map;
 static int block;
 
