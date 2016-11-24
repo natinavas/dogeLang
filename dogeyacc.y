@@ -283,40 +283,26 @@ void yyerror(const char *msg){
 }
 
 int main(void){
-	printf("hola1\n" );
 	map = newMap();
-	printf("hola2\n" );
-
-
-
 	yyparse();
 	return 0;
 }
 
-//TODO
-void addToMap(char * id, int type){
 
+void addToMap(char * id, int type){
+	//TODO cambiar
 	id = "hola";
 
 	Entry_Value entry_value;
 
-	printf("el tipo es :       %d\n\n", type);
-
-	printf("%s\n", id);
-
-	printf("respuestaaa : %d\n", hasKey(map, id));
 
 	if(hasKey(map, id)) {
 		yyerror("same variable declared twice :(\n");
 	}
 
-	printf("sali\n");
-
 	addEntry(map, id, block, type, NULL);
 
 	entry_value = getValue(map, id);
-
-	printf("tipo: %d\n", entry_value->type);
 
 	printAllKeys(map);
 
@@ -326,6 +312,7 @@ void assignNumber(char * id, int number) {
 
 	Entry_Value entry_value;
 
+//TODO cambiar
 	id = "hola";
 
 	if(!hasKey(map, id)) {
@@ -341,9 +328,7 @@ void assignNumber(char * id, int number) {
 	Var_Content content = (Var_Content) malloc(sizeof(Var_Content));
 	content->number = number;
 
-	updateValue(map, id, content);+
-
-	printf("%s ahora vale : %d", id, number);
+	updateValue(map, id, content);
 
 	printAllKeys(map);
 
@@ -353,6 +338,7 @@ void assignWords(char * id, char * s) {
 
 	Entry_Value entry_value;
 
+//TODO cambiar
 	id = "hola";
 
 	if(!hasKey(map, id)) {
@@ -368,9 +354,8 @@ void assignWords(char * id, char * s) {
 	Var_Content content = (Var_Content) malloc(sizeof(Var_Content));
 	content->string = s;
 
-	updateValue(map, id, content);+
+	updateValue(map, id, content);
 
-	printf("%s ahora vale : %s", id, s);
 
 	printAllKeys(map);
 }
