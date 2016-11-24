@@ -13,13 +13,13 @@ string					\".*\"
 space					\ 
 whitespace				[\ \t\n\v\f]
 wss						{whitespace}*
-dogetype				numbr|words
 
 %%
 
 {wss}very{wss}			return VERY;
 {wss}so{wss}			return SO;
-{wss}{dogetype}{wss}	printf("%s\n", yytext); yylval.s=yytext; return DOGETYPE;
+{wss}words{wss}			yylval.s=yytext; return WORDS;
+{wss}numbr{wss}			yylval.s=yytext; return NUMBR;
 {wss}is{wss}			return IS;
 
 {wss}more{wss}			printf("MOOORE\n"); return MORE;
