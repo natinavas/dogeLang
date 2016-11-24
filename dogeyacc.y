@@ -61,6 +61,7 @@ typedef struct entry_value{
 
 
 %type <n> ea ta fa el tl fl logic_exp relational_exp arith_exp
+%type <s> command condition els
 %left MORE LESS
 %left LOTS FEW
 
@@ -73,15 +74,17 @@ command	:	def
 		|	int_assign
 		|	string_assign
 		|	arith_exp
-		|	condition
+		|	RLY logic_exp command	{printf("entro al condition \n");printf("if(%d){$s}"), $2, $3;}
+		|	RLY logic_exp els
 		|	loop
 		|	command command
-		|
+		|	
 		;
 
 				//necesitamos {}???
-condition :		RLY logic_exp command
-			|	RLY logic_exp els
+
+condition :		logic_exp command	{printf("if(%d){$s}"), $1, $2;}
+			|	logic_exp els
 			;
 
 els	:	BUT condition
@@ -102,12 +105,12 @@ def		:	VERY ID SO WORDS		{addToMap($2,1); printf("hola dogetype of type words : 
 
 
 		
-int_assign	:	ID IS arith_exp		{assignNumber($1, $3);printf("hola numeros\n");}
+int_assign	:	ID IS arith_exp		//{assignNumber($1, $3);printf("hola numeros\n");}
 		;
 
 
 	
-string_assign	:	ID IS STRING	{assignWords($1, $3);printf("hola\n");}
+string_assign	:	ID IS STRING	//{assignWords($1, $3);printf("hola\n");}
 		;
 	
 
