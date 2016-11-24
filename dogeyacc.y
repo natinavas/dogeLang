@@ -187,6 +187,7 @@ string_assign	:
 			ID IS STRING	{
 				assignWords($1, $3);
 				$$ = quadAppend($1, "=", $3, ";");
+				}
 				;
 
 arith_exp	:	ea	{$$ = $1}
@@ -287,79 +288,79 @@ void addToMap(char * id, int type){
 
 	id = "hola";
 
-	entry_value * response;
-
-	entry_value entry;
-	entry.block = block;
-	entry.type = type;
+	Entry_Value entry_value;
 
 	printf("el tipo es :       %d\n\n", type);
 
-
 	printf("%s\n", id);
 
-	if(hashmap_get(map, id, &response) == MAP_OK) {
+	printf("respuestaaa : %d\n", hasKey(map, id));
+
+	if(hasKey(map, id)) {
 		yyerror("same variable declared twice :(\n");
 	}
 
 	printf("sali\n");
 
+	addEntry(map, id, block, type, NULL);
 
-	hashmap_put(map, id, &entry);
+	entry_value = getValue(map, id);
 
-	hashmap_get(map, id, &response);
+	printf("tipo: %d\n", entry_value->type);
 
-	printf("respuesta: %d\n", response->type);
-
-	printf("map size : %d\n", hashmap_length(map));
+	printAllKeys(map);
 
 }
 
 void assignNumber(char * id, int number) {
 
-	entry_value *entry;
+	Entry_Value entry_value;
 
 	id = "hola";
 
-	if(hashmap_get(map, id, &entry) == MAP_MISSING) {
+	if(!hasKey(map, id)) {
 		yyerror("the variable does not exist :(\n");
 	}
 
-
-	if(entry->type != 0) {
+	entry_value = getValue(map, id);
+	
+	if(entry_value->type != 0) {
 		yyerror("invalid assignment. Type of variable is not numbr :(\n");
 	}
 
-	hashmap_remove(map, id);
+	Var_Content content = (Var_Content) malloc(sizeof(Var_Content));
+	content->number = number;
 
-	entry->content.number = number;
-
-	hashmap_put(map, id, &entry);
+	updateValue(map, id, content);+
 
 	printf("%s ahora vale : %d", id, number);
+
+	printAllKeys(map);
 
 }
 
 void assignWords(char * id, char * s) {
 
-	entry_value entry;
+	Entry_Value entry_value;
 
 	id = "hola";
 
-	if(hashmap_get(map, id, &entry) == MAP_MISSING) {
+	if(!hasKey(map, id)) {
 		yyerror("the variable does not exist :(\n");
 	}
 
-	if(entry.type != STR) {
-		yyerror("invalid assignment. Type of variable is not words :(\n");
+	entry_value = getValue(map, id);
+	
+	if(entry_value->type != 1) {
+		yyerror("invalid assignment. Type of variable is not numbr :(\n");
 	}
 
-	hashmap_remove(map, id);
+	Var_Content content = (Var_Content) malloc(sizeof(Var_Content));
+	content->string = s;
 
-	entry.content.number = s;
+	updateValue(map, id, content);+
 
-	hashmap_put(map, id, &entry);
+	printf("%s ahora vale : %s", id, s);
 
-	printf("%s ahora vale : %d", id, s);
-
+	printAllKeys(map);
 }
