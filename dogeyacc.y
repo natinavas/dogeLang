@@ -69,34 +69,35 @@ typedef struct entry_value{
 
 %%
 
-program	:	command gotothemoon
-		;
+program		:	commands gotothemoon
+			;
 
-command	:	def
-		|	int_assign
-		|	string_assign
-		|	arith_exp
-		|	RLY logic_exp command	{printf("entro al condition \n");printf("if(%d){%s}", $2, $3);}
-		|	RLY logic_exp els
-		|	loop
-		|	command command
-		|	
-		;
+commands	:	command commands
+			|	
+			;
+
+command		:	def
+			|	int_assign
+			|	string_assign
+			|	arith_exp
+			|	condition
+			|	loop
+			;
 
 				//necesitamos {}???
-
-		condition :		RLY logic_exp command	{printf("if(%d){$s}"), $2, $3;}
-					|	RLY logic_exp els
-					;
-
-		els	:	BUT condition	 {printf("but\n");}
-			|	BUT command
+condition 	:	RLY logic_exp command
+			|	RLY logic_exp els
 			;
+
+els	:	BUT condition
+	|	BUT command
+	|
+	;
 
 loop :	MANY logic_exp command
 	 ;
 
-gotothemoon :	PLZ ID GOTOTHEMOON {printf("go to the moon variable\n");}
+gotothemoon :	PLZ arith_exp GOTOTHEMOON {printf("go to the moon variable\n");}
 			;
 
 
@@ -133,7 +134,7 @@ ta		:	ta LOTS fa	{$$ = $1 * $3;}
 		
 fa		:	'(' ea ')'	{ $$ = $2;}
 		|	NUMBER		{$$ = $1;}
-//		|	ID
+		|	ID			{$$ = $1;}
 		;
 
 logic_exp	:	el		{$$ = $1; printf("resultado : %d\n", $1);}
