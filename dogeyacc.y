@@ -124,7 +124,7 @@ command		:	def  {$$ = $1;}
 			|	comment
 			;
 
-comment		:	SHH
+comment		:	SHH {$$ = triAppend("/*", $1, "*/");}
 			;
 
 condition 	:

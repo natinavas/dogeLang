@@ -47,13 +47,13 @@ shh						shh.*shh
 
 {wss}next{wss}			return NEXT;
 
-{shh}					yylval.s=yytext; return SHH;
+{shh}					yytext[strlen(yytext) - 3] = '\0'; yylval.s = strdup(yytext + 3); return SHH;
 
 [(){}]					return yytext[0];
 
-{number}				yylval.s=yytext; return NUMBER;
-{id}            yylval.s=yytext; printf("id es : %s", yytext); return ID;
-{string}				yylval.s=yytext; return STRING;
+{number}				yylval.s = strdup(yytext); return NUMBER;
+{id}            yylval.s = strdup(yytext); return ID;
+{string}				yylval.s = strdup(yytext); return STRING;
 
 
 
