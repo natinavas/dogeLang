@@ -265,7 +265,6 @@ void addToMap(char * id, int type){
 
 	Entry_Value entry_value;
 
-
 	if(hasKey(map, id)) {
 		yyerror("same variable declared twice :(\n");
 	}
@@ -287,6 +286,7 @@ void assignNumber(char * id, char * number) {
 	}
 
 	entry_value = getValue(map, id);
+
 
 	if(entry_value->type != 0) {
 		yyerror("invalid assignment. Type of variable is not numbr :(\n");
@@ -312,7 +312,7 @@ void assignWords(char * id, char * s) {
 	entry_value = getValue(map, id);
 
 	if(entry_value->type != 1) {
-		yyerror("invalid assignment. Type of variable is not numbr :(\n");
+		yyerror("invalid assignment. Type of variable is not words :(\n");
 	}
 
 	Var_Content content = (Var_Content) malloc(sizeof(Var_Content));

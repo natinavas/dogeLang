@@ -9,7 +9,7 @@
 %option yylineno
 number					[0-9]+
 id						[a-zA-Z][0-9a-zA-Z_]*
-string					\".*\"
+string					\"[^\"]*\"
 space					\
 whitespace				[\ \t\n\v\f]
 wss						{whitespace}*
@@ -53,7 +53,7 @@ shh						shh.*shh
 
 {number}				yylval.s = strdup(yytext); return NUMBER;
 {id}            yylval.s = strdup(yytext); return ID;
-{string}				yylval.s = strdup(yytext); return STRING;
+{string}				yylval.s = strdup(yytext); printf("el string leido es : %s\n", yylval.s); return STRING;
 
 
 
