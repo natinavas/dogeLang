@@ -8,6 +8,7 @@
 
 extern int yylex();
 extern int yylineno;
+extern FILE *yyin;
 void yyerror(const char *msg);
 void assignWords(char * id, char * s);
 void assignNumber(char * id, char * number);
@@ -16,6 +17,7 @@ void compile(char * program);
 
 static Map map;
 static int block;
+static char * outputfile;
 
 %}
 
@@ -263,7 +265,31 @@ void yyerror(const char *msg){
 	exit(1);
 }
 
-int main(void){
+int main(int argc,char *argv[]){
+
+	switch (argc) {
+		case 2:
+			printf("source file not especified :(\n");
+			return 0;
+			break;
+		case 3:
+			outputfile = argv[2];
+			break;
+		default:
+			printf("too many arguments :(\n");
+	}
+
+	int l = strlen(argv[1]);
+	if(strcmp(argv[1] + l - 5, ".doge")) {
+		printf("Source file does not have doge extension\n");
+		return 0;
+	}
+
+	if ( (yyin = fopen(argv[1],"r")) == 0 ) {
+		 perror(argv[1]);
+		 exit(1);
+	 }
+
 	map = newMap();
 	yyparse();
 	return 0;
@@ -334,6 +360,9 @@ void compile(char * program) {
 	fprintf(f, "}");
 
 	fclose(f);
-	system("gcc -o file ./libs/getnum.c file.c");
+	char * command = "gcc -o ";
+	command = append(command, outputfile);
+	command = append(command, " file.c");
+	system(command);
 	system("rm file.c");
 }
