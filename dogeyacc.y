@@ -324,6 +324,7 @@ void compile(char * program) {
 	fprintf(f, "#include <stdio.h>\nint main(void){");
 	fprintf(f, "%s", program);
 	fprintf(f, "}");
-	//system("gcc -o file file.c");
+	fclose(f);
+	system("gcc -o file file.c");
 	system("rm file.c");
 }
