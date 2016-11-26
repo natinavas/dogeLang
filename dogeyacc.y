@@ -291,8 +291,6 @@ int main(void){
 
 
 void addToMap(char * id, int type){
-	//TODO cambiar
-	//id = "hola";
 
 	Entry_Value entry_value;
 
@@ -312,9 +310,6 @@ void addToMap(char * id, int type){
 void assignNumber(char * id, char * number) {
 
 	Entry_Value entry_value;
-
-//TODO cambiar
-	id = "hola";
 
 	if(!hasKey(map, id)) {
 		yyerror("the variable does not exist :(\n");
@@ -338,9 +333,6 @@ void assignNumber(char * id, char * number) {
 void assignWords(char * id, char * s) {
 
 	Entry_Value entry_value;
-
-//TODO cambiar
-	//id = "hola";
 
 	if(!hasKey(map, id)) {
 		yyerror("the variable does not exist :(\n");
