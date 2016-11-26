@@ -31,7 +31,7 @@ int addEntry(Map map, char* key, int block, int type, Var_Content content){
 
 	Entry_Value ev = newEntryValue(block, type, content);
 	if(ev == NULL)
-		return -1;	
+		return -1;
 
 	Node node = newNode(key, ev);
 	if(node == NULL)

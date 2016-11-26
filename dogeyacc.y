@@ -1,7 +1,8 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-#include "hashmap.h"
+#include "./libs/hashmap.h"
+#include "./libs/append.h"
 #include <string.h>
 //#include "dogescan.h"
 
@@ -11,40 +12,10 @@ void yyerror(const char *msg);
 void assignWords(char * id, char * s);
 void assignNumber(char * id, char * number);
 void addToMap();
-char* append(char* s1, char* s2);
-char* triAppend(char* s1, char* s2, char* s3);
-char* quadAppend(char* s1, char* s2, char* s3, char* s4);
+
 static Map map;
 static int block;
 
-//TODO meter en limitaiciones del informe esto de los mallocs
-char* append(char* s1, char* s2){
-		char* s = malloc(strlen(s1) + strlen(s2) + 1);
-		s[0] = '\0'; //will be overwritten by strcat
-
-		strcat(s, s1);
-		strcat(s, s2);
-		return s;
-}
-
-char* triAppend(char* s1, char* s2, char* s3){
-	char* s = malloc(strlen(s1) + strlen(s2) + strlen(s3) + 1);
-	s[0] = '\0'; //will be overwritten by strcat
-	strcat(s, s1);
-	strcat(s, s2);
-	strcat(s, s3);
-	return s;
-}
-
-char* quadAppend(char* s1, char* s2, char* s3, char* s4){
-	char* s = malloc(strlen(s1) + strlen(s2) + strlen(s3) + strlen(s4)+ 1);
-	s[0] = '\0'; //will be overwritten by strcat
-	strcat(s, s1);
-	strcat(s, s2);
-	strcat(s, s3);
-	strcat(s, s4);
-	return s;
-}
 
 enum var_type {NUM, STR};
 
