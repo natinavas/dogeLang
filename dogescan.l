@@ -45,6 +45,8 @@ shh						shh.*shh
 {wss}smallerish{wss}	return SMALLERISH;
 {wss}same{wss}			return SAME;
 
+{wss}wow{wss}			return WOW;
+
 {wss}next{wss}			return NEXT;
 
 {shh}					yytext[strlen(yytext) - 3] = '\0'; yylval.s = strdup(yytext + 3); return SHH;

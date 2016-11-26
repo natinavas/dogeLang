@@ -29,6 +29,9 @@ struct PMap{
 typedef struct PMap * Map;
 
 
+#define T_NUMBER 0
+#define T_STRING 1
+
 Map newMap();
 
 int addEntry(Map map, char* key, int block, int type, Var_Content content);
@@ -44,3 +47,7 @@ void removeByBlock(Map m, int block);
 void printAllKeys(Map m);
 
 void updateValue(Map m, char* key, Var_Content content);
+
+int isNumber(Map map, char* key);
+
+int isString(Map map, char* key);

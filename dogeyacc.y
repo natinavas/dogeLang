@@ -65,11 +65,12 @@ typedef struct entry_value{
 %token BIGGERISH
 %token SMALLERISH
 %token SAME
+%token WOW
 %token <s> SHH
 
 
 %type <s> ea ta fa el tl fl logic_exp relational_exp arith_exp
-%type <s> command condition els gotothemoon commands def int_assign string_assign comment loop
+%type <s> command condition els gotothemoon commands def int_assign string_assign comment loop print
 %left MORE LESS
 %left LOTS FEW
 
@@ -92,11 +93,12 @@ command		:	def  {$$ = $1;}
 			|	arith_exp	{$$ = $1;}
 			|	condition	{$$ = $1;}
 			|	loop	{$$ = $1;}
-			|	comment
+			|	comment	{$$ = $1;}
+			|	print	{$$ = $1;}
 			;
 
 comment		:	SHH {$$ = triAppend("/*", $1, "*/");}
-			;
+					;
 
 condition 	:
 			RLY logic_exp '{' commands '}'{
@@ -139,16 +141,34 @@ gotothemoon :
 			}
 			;
 
+print :
+			WOW ID WOW	{
+				if(isNumber(map, $2)){
+					$$ = triAppend("printf(\"%d\",", getValue(map, $2)->content->string, ");");
+				}else{
+					$$ = triAppend("printf(\"%s\",", getValue(map, $2)->content->string, ");");
+				}
+			}
+			|
+			WOW arith_exp WOW {
+				$$ = triAppend("printf(\"%d\",", $2, ");");
+			}
+			|
+			WOW STRING WOW {
+				$$ = triAppend("printf(\"%s\",", $2, ");");
+			}
+			;
+
 
 def			:
 			VERY ID SO WORDS	{
-				addToMap($2,1); //TODO verificar que no este ya declarado
+				addToMap($2,T_STRING); //TODO verificar que no este ya declarado
 				$$ = triAppend("char* ", $2, ";");
 				printf("hola dogetype of type words : %s\n", $2);
 			}
 			|
 			VERY ID SO NUMBR	{
-				addToMap($2,0);
+				addToMap($2,T_NUMBER);
 				$$ = triAppend("int ", $2, ";");
 				printf("hola dogetype of type number : %s\n", $2);
 			}
@@ -288,7 +308,7 @@ void assignNumber(char * id, char * number) {
 	entry_value = getValue(map, id);
 
 
-	if(entry_value->type != 0) {
+	if(entry_value->type != T_NUMBER) {
 		yyerror("invalid assignment. Type of variable is not numbr :(\n");
 	}
 
@@ -311,7 +331,7 @@ void assignWords(char * id, char * s) {
 
 	entry_value = getValue(map, id);
 
-	if(entry_value->type != 1) {
+	if(entry_value->type != T_STRING) {
 		yyerror("invalid assignment. Type of variable is not words :(\n");
 	}
 

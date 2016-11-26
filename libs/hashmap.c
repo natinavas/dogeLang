@@ -164,3 +164,11 @@ void updateValueRec(Var_Content content, char * key, Node node){
 	}
 	updateValueRec(content, key, node->next);
 }
+
+int isNumber(Map map, char* key){
+	return getValue(map, key)->type == T_NUMBER;
+}
+
+int isString(Map map, char* key){
+	return getValue(map, key)->type == T_STRING;
+}
