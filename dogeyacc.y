@@ -12,24 +12,10 @@ void yyerror(const char *msg);
 void assignWords(char * id, char * s);
 void assignNumber(char * id, char * number);
 void addToMap();
+void compile(char * program);
 
 static Map map;
 static int block;
-
-
-enum var_type {NUM, STR};
-
-typedef union var_content{
-	int number;
-	char * string;
-}var_content;
-
-typedef struct entry_value{
-	int block;
-	int type;
-	var_content content;
-}entry_value;
-
 
 %}
 
@@ -68,7 +54,6 @@ typedef struct entry_value{
 %token WOW
 %token <s> SHH
 
-
 %type <s> ea ta fa el tl fl logic_exp relational_exp arith_exp
 %type <s> command condition els gotothemoon commands def int_assign string_assign comment loop print
 %left MORE LESS
@@ -78,10 +63,11 @@ typedef struct entry_value{
 
 %%
 
-program		:	commands gotothemoon	{printf("hola main\n");printf("int main(){%s}", append($1, $2));}
+program		:	commands gotothemoon	{/*printf("#include <stdio.h>\nint main(){%s}", append($1, $2));*/
+																		compile(append($1, $2));}
 			;
 
-commands	:	command commands	{printf("lista de comandos\n");$$ = append($1, $2);}
+commands	:	command commands	{$$ = append($1, $2);}
 			| /*lambda*/{
 				$$ = "";
 			}
@@ -111,6 +97,7 @@ condition 	:
 				char* aux = triAppend("if(", $2, "){");
 				char* aux2 = triAppend($4, "}", "else ");
 				aux = triAppend(aux, aux2, $7);
+				$$ = aux;
 			}
 			;
 
@@ -132,6 +119,7 @@ loop 		:
 			MANY logic_exp '{' commands '}'{
 				char* aux = triAppend("while(", $2, "){");
 				aux = triAppend(aux, $4, "}");
+				$$ = aux;
 			}
 	 		;
 
@@ -144,9 +132,9 @@ gotothemoon :
 print :
 			WOW ID WOW	{
 				if(isNumber(map, $2)){
-					$$ = triAppend("printf(\"%d\",", getValue(map, $2)->content->string, ");");
+					$$ = triAppend("printf(\"%d\",", $2, ");");
 				}else{
-					$$ = triAppend("printf(\"%s\",", getValue(map, $2)->content->string, ");");
+					$$ = triAppend("printf(\"%s\",", $2, ");");
 				}
 			}
 			|
@@ -162,15 +150,13 @@ print :
 
 def			:
 			VERY ID SO WORDS	{
-				addToMap($2,T_STRING); //TODO verificar que no este ya declarado
+				addToMap($2,T_STRING);
 				$$ = triAppend("char* ", $2, ";");
-				printf("hola dogetype of type words : %s\n", $2);
 			}
 			|
 			VERY ID SO NUMBR	{
 				addToMap($2,T_NUMBER);
 				$$ = triAppend("int ", $2, ";");
-				printf("hola dogetype of type number : %s\n", $2);
 			}
 			;
 
@@ -178,7 +164,6 @@ int_assign		:
 			ID IS arith_exp		{
 				assignNumber($1, $3);
 				$$ = quadAppend($1, "=", $3, ";");
-				printf("hola numeros\n");
 			}
 			;
 
@@ -194,7 +179,6 @@ arith_exp	:	ea	{$$ = $1;}
 
 ea		:
 		ea MORE ta	{
-			printf("moreeee\n");
 			$$ = triAppend($1, "+", $3);
 		}
 		|
@@ -216,7 +200,7 @@ ta		:
 		;
 
 fa		:	'(' ea ')'	{ $$ = $2;}
-		|	NUMBER		{printf("numerooo %s\n", $1);$$ = $1;}
+		|	NUMBER		{$$ = $1;}
 		|	ID			{$$ = $1;}
 		;
 
@@ -292,9 +276,6 @@ void addToMap(char * id, int type){
 	addEntry(map, id, block, type, NULL);
 
 	entry_value = getValue(map, id);
-
-	printAllKeys(map);
-
 }
 
 void assignNumber(char * id, char * number) {
@@ -316,9 +297,6 @@ void assignNumber(char * id, char * number) {
 	content->string = number;
 
 	updateValue(map, id, content);
-
-	printAllKeys(map);
-
 }
 
 void assignWords(char * id, char * s) {
@@ -339,7 +317,13 @@ void assignWords(char * id, char * s) {
 	content->string = s;
 
 	updateValue(map, id, content);
+}
 
-
-	printAllKeys(map);
+void compile(char * program) {
+	FILE *f = fopen("file.c", "w+");
+	fprintf(f, "#include <stdio.h>\nint main(void){");
+	fprintf(f, "%s", program);
+	fprintf(f, "}");
+	//system("gcc -o file file.c");
+	system("rm file.c");
 }
