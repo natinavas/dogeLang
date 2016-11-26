@@ -46,6 +46,7 @@ shh						shh.*shh
 {wss}same{wss}			return SAME;
 
 {wss}wow{wss}			return WOW;
+{wss}want{wss}		return WANT;
 
 {wss}next{wss}			return NEXT;
 

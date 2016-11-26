@@ -52,6 +52,7 @@ static int block;
 %token SMALLERISH
 %token SAME
 %token WOW
+%token WANT
 %token <s> SHH
 
 %type <s> ea ta fa el tl fl logic_exp relational_exp arith_exp
@@ -147,7 +148,6 @@ print :
 			}
 			;
 
-
 def			:
 			VERY ID SO WORDS	{
 				addToMap($2,T_STRING);
@@ -164,6 +164,11 @@ int_assign		:
 			ID IS arith_exp		{
 				assignNumber($1, $3);
 				$$ = quadAppend($1, "=", $3, ";");
+			}
+			|
+			ID IS WANT NUMBR		{
+				assignNumber($1, 0);
+				$$ = biAppend($1, "= getint(\"\");");
 			}
 			;
 
@@ -321,10 +326,14 @@ void assignWords(char * id, char * s) {
 
 void compile(char * program) {
 	FILE *f = fopen("file.c", "w+");
-	fprintf(f, "#include <stdio.h>\nint main(void){");
+
+	fprintf(f, "#include <stdio.h>\n");
+
+	fprintf(f, "int main(void){");
 	fprintf(f, "%s", program);
 	fprintf(f, "}");
+
 	fclose(f);
-	system("gcc -o file file.c");
+	system("gcc -o file ./libs/getnum.c file.c");
 	system("rm file.c");
 }
