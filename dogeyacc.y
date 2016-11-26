@@ -2,13 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "hashmap.h"
+#include <string.h>
 //#include "dogescan.h"
 
 extern int yylex();
 extern int yylineno;
 void yyerror(const char *msg);
 void assignWords(char * id, char * s);
-void assignNumber(char * id, int number);
+void assignNumber(char * id, char * number);
 void addToMap();
 char* append(char* s1, char* s2);
 char* triAppend(char* s1, char* s2, char* s3);
@@ -291,7 +292,7 @@ int main(void){
 
 void addToMap(char * id, int type){
 	//TODO cambiar
-	id = "hola";
+	//id = "hola";
 
 	Entry_Value entry_value;
 
@@ -308,7 +309,7 @@ void addToMap(char * id, int type){
 
 }
 
-void assignNumber(char * id, int number) {
+void assignNumber(char * id, char * number) {
 
 	Entry_Value entry_value;
 
@@ -326,7 +327,7 @@ void assignNumber(char * id, int number) {
 	}
 
 	Var_Content content = (Var_Content) malloc(sizeof(Var_Content));
-	content->number = number;
+	content->string = number;
 
 	updateValue(map, id, content);
 
@@ -339,7 +340,7 @@ void assignWords(char * id, char * s) {
 	Entry_Value entry_value;
 
 //TODO cambiar
-	id = "hola";
+	//id = "hola";
 
 	if(!hasKey(map, id)) {
 		yyerror("the variable does not exist :(\n");

@@ -19,8 +19,8 @@ shh						shh.*shh
 
 {wss}very{wss}			return VERY;
 {wss}so{wss}			return SO;
-{wss}words{wss}			yylval.s=yytext; return WORDS;
-{wss}numbr{wss}			yylval.s=yytext; return NUMBR;
+{wss}words{wss}			return WORDS;
+{wss}numbr{wss}			return NUMBR;
 {wss}is{wss}			return IS;
 
 {wss}more{wss}			return MORE;
@@ -52,7 +52,7 @@ shh						shh.*shh
 [(){}]					return yytext[0];
 
 {number}				yylval.s=yytext; return NUMBER;
-{id}					yylval.s=yytext; return ID;
+{id}            yylval.s=yytext; printf("id es : %s", yytext); return ID;
 {string}				yylval.s=yytext; return STRING;
 
 
