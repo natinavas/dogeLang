@@ -32,7 +32,6 @@ shh						shh.*shh
 {wss}go{wss}to{wss}the{wss}moon{wss}	return GOTOTHEMOON;
 
 {wss}rly{wss}			return RLY;
-{wss}notrly{wss}		return NOTRLY;
 {wss}but{wss}			return BUT;
 {wss}many{wss}			return MANY;
 
@@ -48,7 +47,6 @@ shh						shh.*shh
 {wss}wow{wss}			return WOW;
 {wss}want{wss}		return WANT;
 
-{wss}next{wss}			return NEXT;
 
 {shh}					yytext[strlen(yytext) - 3] = '\0'; yylval.s = strdup(yytext + 3); return SHH;
 

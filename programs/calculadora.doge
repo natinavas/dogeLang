@@ -1,0 +1,51 @@
+wow "Bienvenidos a la calculadora doge.\n" wow
+very num1 so numbr
+very num2 so numbr
+very op so numbr
+
+wow "Por favor introduzca el primer nuemro.\n" wow
+num1 is want numbr
+wow "Por favor introduzca el segundo nuemro.\n" wow
+num2 is want numbr
+
+op is 90
+many op bigger 4 or op smaller 1{
+
+  wow "Por favor elija una de las siguientes operaciones:\n" wow
+  wow "1) suma\n" wow
+  wow "2) resta\n" wow
+  wow "3) multiplicación\n" wow
+  wow "4) división\n" wow
+
+  op is want numbr
+
+  rly op bigger 4 or op smaller 1 {
+    wow "Opción invalida.\n" wow
+  }
+
+}
+very resultado so numbr
+very opstr so words
+rly op same 1{
+  resultado is num1 more num2
+  opstr is " + "
+} but rly op same 2{
+  resultado is num1 less num2
+  opstr is " - "
+} but rly op same 3{
+  resultado is num1 lots num2
+  opstr is " * "
+} but {
+  resultado is num1 few num2
+  opstr is " / "
+}
+
+wow "Operación: " wow
+wow num1 wow
+wow opstr wow
+wow num2 wow
+wow "\n" wow
+wow "Resultado: " wow
+wow resultado wow
+wow "\n" wow
+plz 1 go to the moon

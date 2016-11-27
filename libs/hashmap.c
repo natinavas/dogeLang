@@ -40,7 +40,6 @@ int addEntry(Map map, char* key, int block, int type, Var_Content content){
 	node->next = map->first;
 	map->first = node;
 	map->size++;
-	printf("%d\n", map->size);
 	return 1;
 }
 

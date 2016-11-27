@@ -41,10 +41,8 @@ static char * outputfile;
 %token PLZ
 %token GOTOTHEMOON
 %token RLY
-%token NOTRLY
 %token BUT
 %token MANY
-%token NEXT
 %token NOT
 %token AND
 %token OR
@@ -62,19 +60,19 @@ static char * outputfile;
 %left MORE LESS
 %left LOTS FEW
 
+
 %start program
 
 %%
 
-program		:	commands gotothemoon	{/*printf("#include <stdio.h>\nint main(){%s}", append($1, $2));*/
-																		compile(append($1, $2));}
-			;
+program		:	commands gotothemoon	{compile(append($1, $2));}
+					;
 
 commands	:	command commands	{$$ = append($1, $2);}
-			| /*lambda*/{
-				$$ = "";
-			}
-			;
+					| /*lambda*/{
+					$$ = "";
+					}
+					;
 
 command		:	def  {$$ = $1;}
 			|	int_assign	{$$ = $1;}
@@ -213,6 +211,8 @@ fa		:	'(' ea ')'	{ $$ = $2;}
 		|	ID			{$$ = $1;}
 		;
 
+
+
 logic_exp	:	el		{$$ = $1;}
 		;
 
@@ -236,6 +236,7 @@ fl		:
 		}
 		|	relational_exp		{$$ = $1;}
 		|	'(' el ')'		{$$ = $2;}
+		;
 
 relational_exp	:
 		arith_exp BIGGER arith_exp	{
