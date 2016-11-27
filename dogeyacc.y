@@ -14,6 +14,7 @@ void assignWords(char * id, char * s);
 void assignNumber(char * id, char * number);
 void addToMap();
 void compile(char * program);
+void deleteVariablesInBlock();
 
 static Map map;
 static int block;
@@ -29,6 +30,8 @@ static char * outputfile;
 %token <s> NUMBER
 %token <s> ID
 %token <s> STRING
+%token OPENBRACKET
+%token CLOSEBRACKET
 %token VERY
 %token SO
 %token WORDS
@@ -55,7 +58,7 @@ static char * outputfile;
 %token WANT
 %token <s> SHH
 
-%type <s> ea ta fa el tl fl logic_exp relational_exp arith_exp
+%type <s> ea ta fa el tl fl logic_exp relational_exp arith_exp open_block close_block
 %type <s> command condition els gotothemoon commands def int_assign string_assign comment loop print
 %left MORE LESS
 %left LOTS FEW
@@ -88,13 +91,13 @@ comment		:	SHH {$$ = triAppend("/*", $1, "*/");}
 					;
 
 condition 	:
-			RLY logic_exp '{' commands '}'{
+			RLY logic_exp open_block commands close_block{
 				char* aux = triAppend("if(", $2, "){");
 				aux = triAppend(aux, $4, "}");
 				$$ = aux;
 			}
 			|
-			RLY logic_exp '{' commands '}' BUT els {
+			RLY logic_exp open_block commands close_block BUT els {
 				char* aux = triAppend("if(", $2, "){");
 				char* aux2 = triAppend($4, "}", "else ");
 				aux = triAppend(aux, aux2, $7);
@@ -107,7 +110,7 @@ els			:
 				$$ = $1;
 			}
 			|
-			'{' commands '}' {
+			open_block commands close_block {
 				char* aux = triAppend("{", $2, "}");
 				$$ = aux;
 			}
@@ -117,9 +120,20 @@ els			:
 			}*/
 			;
 
+open_block	:
+			OPENBRACKET {
+				block++;
+			}
+
+close_block	:
+			CLOSEBRACKET {
+				deleteVariablesInBlock();
+				block--;
+			}
+
 
 loop 		:
-			MANY logic_exp '{' commands '}'{
+			MANY logic_exp open_block commands close_block{
 				char* aux = triAppend("while(", $2, "){");
 				aux = triAppend(aux, $4, "}");
 				$$ = aux;
@@ -294,6 +308,7 @@ int main(int argc,char *argv[]){
 	 }
 
 	map = newMap();
+	block = 0;
 	yyparse();
 	return 0;
 }
@@ -308,6 +323,8 @@ void addToMap(char * id, int type){
 	}
 
 	addEntry(map, id, block, type, NULL);
+
+		printf("el bloque de la  var : %s es %d\n", id, block);
 
 	entry_value = getValue(map, id);
 }
@@ -351,6 +368,10 @@ void assignWords(char * id, char * s) {
 	content->string = s;
 
 	updateValue(map, id, content);
+}
+
+void deleteVariablesInBlock() {
+		removeByBlock(map, block);
 }
 
 void compile(char * program) {

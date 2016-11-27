@@ -43,6 +43,8 @@ shh						shh.*shh
 {wss}biggerish{wss}		return BIGGERISH;
 {wss}smallerish{wss}	return SMALLERISH;
 {wss}same{wss}			return SAME;
+[{]                 return OPENBRACKET;
+[}]                 return CLOSEBRACKET;
 
 {wss}wow{wss}			return WOW;
 {wss}want{wss}		return WANT;
