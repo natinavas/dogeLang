@@ -96,7 +96,7 @@ condition 	:
 				$$ = aux;
 			}
 			|
-			RLY logic_exp '{' commands '}' BUT els{
+			RLY logic_exp '{' commands '}' BUT els {
 				char* aux = triAppend("if(", $2, "){");
 				char* aux2 = triAppend($4, "}", "else ");
 				aux = triAppend(aux, aux2, $7);
@@ -111,10 +111,12 @@ els			:
 			|
 			'{' commands '}' {
 				char* aux = triAppend("{", $2, "}");
+				$$ = aux;
 			}
-			| /*lambda*/ {
-				$$ = "";
-			}
+/*			|  {
+				char aux = "{}";
+				$$ = aux;
+			}*/
 			;
 
 
@@ -362,7 +364,7 @@ void compile(char * program) {
 	fclose(f);
 	char * command = "gcc -o ";
 	command = append(command, outputfile);
-	command = append(command, " file.c");
+	command = append(command, " ./libs/getnum.c file.c");
 	system(command);
 	system("rm file.c");
 }

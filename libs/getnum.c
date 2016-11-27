@@ -71,7 +71,7 @@ getdouble(const char mensaje[], ...)
 
 		if ( scanf("%lg",&n) != 1)
 		{
-			printf("\nDato incorrecto\n");
+			printf("\nSUCH WRONG INPUT\n");
 			BORRA_BUFFER;
 		}
 		else
