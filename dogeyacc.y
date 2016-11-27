@@ -324,8 +324,6 @@ void addToMap(char * id, int type){
 
 	addEntry(map, id, block, type, NULL);
 
-		printf("el bloque de la  var : %s es %d\n", id, block);
-
 	entry_value = getValue(map, id);
 }
 
