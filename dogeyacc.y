@@ -286,14 +286,14 @@ int main(int argc,char *argv[]){
 
 	switch (argc) {
 		case 2:
-			printf("source file not especified :(\n");
+			printf("source file not especified\n");
 			return 0;
 			break;
 		case 3:
 			outputfile = argv[2];
 			break;
 		default:
-			printf("too many arguments :(\n");
+			printf("too many arguments\n");
 	}
 
 	int l = strlen(argv[1]);
@@ -319,7 +319,7 @@ void addToMap(char * id, int type){
 	Entry_Value entry_value;
 
 	if(hasKey(map, id)) {
-		yyerror("same variable declared twice :(\n");
+		yyerror("same variable declared twice\n");	
 	}
 
 	addEntry(map, id, block, type, NULL);
@@ -332,14 +332,14 @@ void assignNumber(char * id, char * number) {
 	Entry_Value entry_value;
 
 	if(!hasKey(map, id)) {
-		yyerror("the variable does not exist :(\n");
+		yyerror("the variable does not exist\n");
 	}
 
 	entry_value = getValue(map, id);
 
 
 	if(entry_value->type != T_NUMBER) {
-		yyerror("invalid assignment. Type of variable is not numbr :(\n");
+		yyerror("invalid assignment. Type of variable is not numbr\n");
 	}
 
 	Var_Content content = (Var_Content) malloc(sizeof(Var_Content));
@@ -353,13 +353,13 @@ void assignWords(char * id, char * s) {
 	Entry_Value entry_value;
 
 	if(!hasKey(map, id)) {
-		yyerror("the variable does not exist :(\n");
+		yyerror("the variable does not exist\n");
 	}
 
 	entry_value = getValue(map, id);
 
 	if(entry_value->type != T_STRING) {
-		yyerror("invalid assignment. Type of variable is not words :(\n");
+		yyerror("invalid assignment. Type of variable is not words\n");
 	}
 
 	Var_Content content = (Var_Content) malloc(sizeof(Var_Content));
