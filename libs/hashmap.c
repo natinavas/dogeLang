@@ -165,9 +165,15 @@ void updateValueRec(Var_Content content, char * key, Node node){
 }
 
 int isNumber(Map map, char* key){
-	return getValue(map, key)->type == T_NUMBER;
+	Entry_Value ret = getValue(map, key);
+	if(ret == NULL)
+		return 0;
+	return ret->type == T_NUMBER;
 }
 
 int isString(Map map, char* key){
-	return getValue(map, key)->type == T_STRING;
+	Entry_Value ret = getValue(map, key);
+	if(ret == NULL)
+		return 0;
+	return ret->type == T_STRING;
 }

@@ -61,6 +61,8 @@ static char * outputfile;
 %left LOTS FEW
 
 
+
+
 %start program
 
 %%
@@ -133,16 +135,12 @@ gotothemoon :
 			;
 
 print :
-			WOW ID WOW	{
-				if(isNumber(map, $2)){
-					$$ = triAppend("printf(\"%d\",", $2, ");");
-				}else{
+			WOW arith_exp WOW	{
+				if(isString(map, $2)){
 					$$ = triAppend("printf(\"%s\",", $2, ");");
+				}else{
+					$$ = triAppend("printf(\"%d\",", $2, ");");
 				}
-			}
-			|
-			WOW arith_exp WOW {
-				$$ = triAppend("printf(\"%d\",", $2, ");");
 			}
 			|
 			WOW STRING WOW {

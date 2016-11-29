@@ -13,7 +13,7 @@ string					\"[^\"]*\"
 space					\
 whitespace				[\ \t\n\v\f]
 wss						{whitespace}*
-shh						shh.*shh
+shh						shh.*shhhh
 
 %%
 
