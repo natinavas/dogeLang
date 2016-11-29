@@ -14,6 +14,7 @@ void assignWords(char * id, char * s);
 void assignNumber(char * id, char * number);
 void addToMap();
 void compile(char * program);
+void deleteVariablesInBlock();
 
 static Map map;
 static int block;
@@ -29,6 +30,8 @@ static char * outputfile;
 %token <s> NUMBER
 %token <s> ID
 %token <s> STRING
+%token OPENBRACKET
+%token CLOSEBRACKET
 %token VERY
 %token SO
 %token WORDS
@@ -55,7 +58,7 @@ static char * outputfile;
 %token WANT
 %token <s> SHH
 
-%type <s> ea ta fa el tl fl logic_exp relational_exp arith_exp
+%type <s> ea ta fa el tl fl logic_exp relational_exp arith_exp open_block close_block
 %type <s> command condition els gotothemoon commands def int_assign string_assign comment loop print
 %left MORE LESS
 %left LOTS FEW
@@ -90,13 +93,13 @@ comment		:	SHH {$$ = triAppend("/*", $1, "*/");}
 					;
 
 condition 	:
-			RLY logic_exp '{' commands '}'{
+			RLY logic_exp open_block commands close_block{
 				char* aux = triAppend("if(", $2, "){");
 				aux = triAppend(aux, $4, "}");
 				$$ = aux;
 			}
 			|
-			RLY logic_exp '{' commands '}' BUT els {
+			RLY logic_exp open_block commands close_block BUT els {
 				char* aux = triAppend("if(", $2, "){");
 				char* aux2 = triAppend($4, "}", "else ");
 				aux = triAppend(aux, aux2, $7);
@@ -109,7 +112,7 @@ els			:
 				$$ = $1;
 			}
 			|
-			'{' commands '}' {
+			open_block commands close_block {
 				char* aux = triAppend("{", $2, "}");
 				$$ = aux;
 			}
@@ -119,9 +122,20 @@ els			:
 			}*/
 			;
 
+open_block	:
+			OPENBRACKET {
+				block++;
+			}
+
+close_block	:
+			CLOSEBRACKET {
+				deleteVariablesInBlock();
+				block--;
+			}
+
 
 loop 		:
-			MANY logic_exp '{' commands '}'{
+			MANY logic_exp open_block commands close_block{
 				char* aux = triAppend("while(", $2, "){");
 				aux = triAppend(aux, $4, "}");
 				$$ = aux;
@@ -270,14 +284,14 @@ int main(int argc,char *argv[]){
 
 	switch (argc) {
 		case 2:
-			printf("source file not especified :(\n");
+			printf("source file not especified\n");
 			return 0;
 			break;
 		case 3:
 			outputfile = argv[2];
 			break;
 		default:
-			printf("too many arguments :(\n");
+			printf("too many arguments\n");
 	}
 
 	int l = strlen(argv[1]);
@@ -292,6 +306,7 @@ int main(int argc,char *argv[]){
 	 }
 
 	map = newMap();
+	block = 0;
 	yyparse();
 	return 0;
 }
@@ -302,7 +317,7 @@ void addToMap(char * id, int type){
 	Entry_Value entry_value;
 
 	if(hasKey(map, id)) {
-		yyerror("same variable declared twice :(\n");
+		yyerror("same variable declared twice\n");	
 	}
 
 	addEntry(map, id, block, type, NULL);
@@ -315,14 +330,14 @@ void assignNumber(char * id, char * number) {
 	Entry_Value entry_value;
 
 	if(!hasKey(map, id)) {
-		yyerror("the variable does not exist :(\n");
+		yyerror("the variable does not exist\n");
 	}
 
 	entry_value = getValue(map, id);
 
 
 	if(entry_value->type != T_NUMBER) {
-		yyerror("invalid assignment. Type of variable is not numbr :(\n");
+		yyerror("invalid assignment. Type of variable is not numbr\n");
 	}
 
 	Var_Content content = (Var_Content) malloc(sizeof(Var_Content));
@@ -336,19 +351,23 @@ void assignWords(char * id, char * s) {
 	Entry_Value entry_value;
 
 	if(!hasKey(map, id)) {
-		yyerror("the variable does not exist :(\n");
+		yyerror("the variable does not exist\n");
 	}
 
 	entry_value = getValue(map, id);
 
 	if(entry_value->type != T_STRING) {
-		yyerror("invalid assignment. Type of variable is not words :(\n");
+		yyerror("invalid assignment. Type of variable is not words\n");
 	}
 
 	Var_Content content = (Var_Content) malloc(sizeof(Var_Content));
 	content->string = s;
 
 	updateValue(map, id, content);
+}
+
+void deleteVariablesInBlock() {
+		removeByBlock(map, block);
 }
 
 void compile(char * program) {
