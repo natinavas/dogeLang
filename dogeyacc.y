@@ -244,7 +244,7 @@ tl		:
 
 fl		:
 		NOT relational_exp	{
-			$$ = append("!", $2);
+			$$ = triAppend("!(", $2, ")");
 		}
 		|	relational_exp		{$$ = $1;}
 		|	'(' el ')'		{$$ = $2;}
@@ -317,7 +317,7 @@ void addToMap(char * id, int type){
 	Entry_Value entry_value;
 
 	if(hasKey(map, id)) {
-		yyerror("same variable declared twice\n");	
+		yyerror("same variable declared twice\n");
 	}
 
 	addEntry(map, id, block, type, NULL);

@@ -52,7 +52,7 @@ shh						shh.*shhhh
 
 {shh}					yytext[strlen(yytext) - 3] = '\0'; yylval.s = strdup(yytext + 3); return SHH;
 
-[(){}]					return yytext[0];
+[()]					return yytext[0];
 
 {number}				yylval.s = strdup(yytext); return NUMBER;
 {id}            yylval.s = strdup(yytext); return ID;
