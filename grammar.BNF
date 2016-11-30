@@ -1,41 +1,43 @@
-<program>::=<statement><programend><endline>|<programend><endline>
+<program>::=<commands> <gotothemoon>
 
-<statement>::=<statement><statement>|<assignment><endline>|<conditional>|<loop>|<definition><endline>
+<commands>::=<command> <commands>|
 
-<definition>::="very "<identifier>" is "<arithmetic_expr>" so numbr"|"very "<identifier>" is "<string>" so words"
+<command>::=<def>|<int_assign>|<string_assign>|<arith_exp>|<condition>|<loop>|<comment>|<print>
 
-<assigment>::=<identifier>" "<arithmetic_operator>" "<int_expr>	|<identifier>" is "<int_expr>|<identifier>" is "<string>
+<condition>::="rly" <logic_exp> <open_block> <commands> <close_block>|"rly" <logic_exp> <open_block> <commands> <close_block> "but" <els>
 
-<conditional>::=<if>|<if><elseif>|<if><elseif><else>
+<els>::=<condition>|<open_block> <commands> <close_block>|
 
-<if>::="rly "<logical_expr> <openblock> <statement> <closeblock>|"notrly "<logical_expr> <openblock> <statement> <closeblock>
+<open_block>::='{'
 
-<elseif>::=<elseif><elseif>|"but "<if>
+<close_block>::='}'
 
-<else>::="but "<openblock> <statement> <closeblock>
+<loop>::="many" <logic_exp> <open_block> <commands> <close_block>
 
-<loop>::="many "<logical_expr> <openblock> <statement> <closeblock>
+<gotothemoon>::="plz" <arith_exp> "go to the moon"
 
-<openblock>::="wow"
+<print>::="wow" <arith_exp> "wow"|"wow" string "wow"
 
-<closeblock>::"woow"
+<def>::="very" id "so words"|"very" id "so numbr"
 
-<endline>::=" next"
+<int_assign>::= id "is" <arith_exp>|id "is want numbr"
 
-<identifier>::=id
+<string_assign>::=id "is" string
 
-<programend>::="plz "<operand>" go to the moon"|"plz "<string>" go to the moon"
+<arith_exp>::=<ea>
 
-<int_expr>::=int
+<ea>::=<ea> "more" <ta>|<ea> "less" <ta>|<ta>
 
-<string>::=string
+<ta>::=<ta> LOTS <fa>|<ta> FEW <fa>|<fa>
 
-<operand>::=<identifier>|<int_expr>
+<fa>::=	'(' <ea> ')'|	number | id
 
-<logical_expr>::=<operand>" "<logic_operator>" "<operand>
+<logic_exp>::=<el>
 
-<arithmetic_expr>::=<arithmetic_expr><arithmetic_operator><arithmetic_expr>|<int_expr>
+<el>::=<el> "or" <tl> |	<tl>
 
-<logic_operator>::="not"|"and"|"or"|"bigger"|"smaller"|"biggerish"|"smallerish"
+<tl>::=<tl> "and" <fl>	|	<fl>
 
-<arithmetic_operator>::="more"|"less"|"lots"|"few"
+<fl>::="not" <relational_exp>	|	<relational_exp>	|	'(' <el> ')'
+
+<relational_exp>::=<arith_exp> "bigger" <arith_exp>	| <arith_exp> "smaller" <arith_exp>	| <arith_exp> "biggerish" <arith_exp>	| <arith_exp> "smallerish" <arith_exp>	| <arith_exp> "same" <arith_exp>
