@@ -1,0 +1,25 @@
+wow "Ingresa números y yo sabré cual es el mayor. Muahahahahah\nPara terminar ingresar el numero 0. Muahahahahah\n" wow
+very c so numbr
+very max so numbr
+c is 0 less 1
+very flag so numbr
+flag is 0
+
+many not c same 0{
+
+  rly flag same 0{
+    flag is 1
+    max is c
+  }
+
+  c is want numbr
+  rly c bigger max{
+    max is c
+  }
+
+}
+
+wow "El número igresado mas grande es.... " wow
+wow max wow
+wow "\tMuahahahahah\n" wow
+plz max go to the moon

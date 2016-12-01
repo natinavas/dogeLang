@@ -1,0 +1,36 @@
+very num so numbr
+wow "¿Que número desea saber si es par?\n" wow
+num is want numbr
+
+rly num smaller 0 {
+  num is 0 less num
+}
+
+very c so numbr
+c is 0
+very esPar so numbr
+esPar is 0
+
+
+many not c same num {
+
+  rly esPar same 0{
+    esPar is 1
+  }but{
+    esPar is 0
+  }
+
+  c is c more 1
+
+}
+
+very rta so words
+rly esPar same 0{
+  rta is " es un número par!\n"
+}but{
+  rta is " no es un número par!\n"
+}
+
+wow num wow
+wow rta wow
+plz 1 go to the moon

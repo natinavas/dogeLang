@@ -1,0 +1,19 @@
+very num so numbr
+wow "Inserte el número hasta el cual quiere contar\n" wow
+num is want numbr
+
+rly num smaller 0{
+ wow "El número es menor a 0!!\n" wow
+}but{
+
+  many not num same 0{
+    wow num wow
+    wow "!!\n" wow
+    num is num less 1
+  }
+
+  wow "0!!\nDESPEGUEN!!!\n" wow
+
+}
+
+plz 1 go to the moon

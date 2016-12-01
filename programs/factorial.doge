@@ -1,0 +1,29 @@
+very num so numbr
+very ret so numbr
+wow "Introduzca un numero para sacar el factorial\n" wow
+num is want numbr
+
+rly num smaller 0{
+  wow "No se puede sacar el factorial de un numero negativo.\n" wow
+  ret is 0
+}but rly num same 0{
+  wow "Respuesta: " wow
+  wow 1 wow
+  wow "\n" wow
+  ret is 0
+}but{
+
+  very i so numbr
+  i is num
+  many i bigger 1{
+    i is i less 1
+    num is num lots i
+  }
+
+  wow "Respuesta: " wow
+  wow num wow
+  wow "\n" wow
+  ret is 1
+}
+
+  plz ret go to the moon
