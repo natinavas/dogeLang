@@ -7,7 +7,6 @@
 //#include "dogescan.h"
 
 extern int yylex();
-extern int yylineno;
 extern FILE *yyin;
 void yyerror(const char *msg);
 void assignWords(char * id, char * s);
