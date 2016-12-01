@@ -276,7 +276,7 @@ relational_exp	:
 
 /* Called by yyparse on error */
 void yyerror(const char *msg){
-	fprintf(stderr, "Error at line [%d]: %s\n", yylineno, msg);
+	fprintf(stderr, "%s\n", msg);
 	exit(1);
 }
 
