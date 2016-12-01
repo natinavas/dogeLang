@@ -18,7 +18,7 @@ void deleteVariablesInBlock();
 
 static Map map;
 static int block;
-static char * outputfile;
+static char * outputfile = "a.out";
 
 %}
 
@@ -283,15 +283,12 @@ void yyerror(const char *msg){
 int main(int argc,char *argv[]){
 
 	switch (argc) {
-		case 2:
-			printf("source file not especified\n");
-			return 0;
-			break;
 		case 3:
 			outputfile = argv[2];
 			break;
 		default:
-			printf("too many arguments\n");
+			printf("wrong number of arguments\n");
+			return 0;
 	}
 
 	int l = strlen(argv[1]);
